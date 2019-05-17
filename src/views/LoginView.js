@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  CardHeader,
+  ListGroup,
+  ListGroupItem,
+} from 'shards-react';
 
 class LoginView extends Component {
   constructor(props) {
@@ -8,7 +17,11 @@ class LoginView extends Component {
     this.state = {
       username: '',
       password: '',
-      submitted: false
+      submitted: false,
+      userDetails: {
+       name: "Gradus",
+       jobTitle: "Login",
+     }
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -24,39 +37,56 @@ class LoginView extends Component {
     e.preventDefault();
     this.setState({ submitted: true });
     const { username, password } = this.state;
-    console.log('username ' + username + " password " + password);
+    if (username !== '' && password !== '') {
+      sessionStorage.setItem('user', 'logged in')
+      this.props.history.push('/');
+    }
   }
 
   render() {
-    const { loggingIn } = this.props;
-    const { username, password, submitted } = this.state;
+    const { username, password, submitted, userDetails } = this.state;
 
     return (
-      <div className="col-md-6 col-md-offset-3">
-        <h2>Login</h2>
-        <form name="form" onSubmit={this.handleSubmit}>
-          <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
-            <label htmlFor="username">Username</label>
-            <input type="text" className="form-control" name="username" value={username} onChange={this.handleChange} />
-            {submitted && !username &&
-              <div className="help-block">Username is required</div>}
-          </div>
-          <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
-            <label htmlFor="password">Password</label>
-            <input type="password" className="form-control" name="password" value={password} onChange={this.handleChange} />
-            {submitted && !password &&
-              <div className="help-block">Password is required</div>}
-          </div>
-          <div className="form-group">
-            <button className="btn btn-primary">Login</button>
-            {loggingIn &&
-              <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />}
-            <Link to="/register" className="btn btn-link">Register</Link>
-          </div>
-        </form>
-      </div>
+      <Container fluid>
+        <Row noGutters>
+          <Col />
+          <Col className='my-4'>
+            <Card small className="mb-4 pt-3">
+              <CardHeader className="border-bottom text-center">
+                <div className="mb-3 mx-auto">
+                </div>
+                <h4 className="mb-0">{userDetails.name}</h4>
+                <span className="text-muted d-block mb-2">{userDetails.jobTitle}</span>
+              </CardHeader>
+              <ListGroup flush>
+                <ListGroupItem className="px-4">
+                  <form name="form" onSubmit={this.handleSubmit}>
+                    <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
+                      <label htmlFor="username">Username</label>
+                      <input type="text" className="form-control" name="username" value={username} onChange={this.handleChange} />
+                      {submitted && !username &&
+                        <div className="help-block">Username is required</div>}
+                    </div>
+                    <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
+                      <label htmlFor="password">Password</label>
+                      <input type="password" className="form-control" name="password" value={password} onChange={this.handleChange} />
+                      {submitted && !password &&
+                        <div className="help-block">Password is required</div>}
+                    </div>
+                    <div className="form-group">
+                      <button className="btn btn-primary">Login</button>
+                      <Link to="/register" className="btn btn-link">Register</Link>
+                    </div>
+                  </form>
+                </ListGroupItem>
+              </ListGroup>
+            </Card>
+          </Col>
+          <Col />
+        </Row>
+      </Container>
     );
   }
 }
 
-export default LoginView;
+export default withRouter(LoginView);

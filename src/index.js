@@ -8,12 +8,13 @@ import LoginView from './views/LoginView'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./shards.min.css";
 
+const rootElement = document.getElementById('root');
 ReactDOM.render(
     <Router>
-      {localStorage.getItem('user') && <Routes />}
-      {!localStorage.getItem('user') && <Route path='/login' component={LoginView} loggingIn='false' />}
+      <Routes />
+      <Route path='/login' component={ LoginView } />
     </Router>,
-    document.getElementById('root')
+    rootElement
 );
 
 // If you want your app to work offline and load faster, you can change
