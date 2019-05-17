@@ -17,7 +17,7 @@ const AssignmentView = () => (
         <Container fluid className="main-content-container px-4">
           <Row className="page-header py-4">
             <Col xs="12" sm="4" className="text-center text-md-left mb-sm-0">
-              <span className="text-uppercase page-subtitle">Scantron</span>
+              <span className="text-uppercase page-subtitle">Gradus</span>
               <h3 className="page-title">Settings</h3>
             </Col>
           </Row>
