@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from 'react-router-dom';
 import {
   Card,
   CardHeader,
@@ -10,21 +11,9 @@ import {
 const OverviewCard = ({ title }) => (
   <Card className="mb-4" style={{ 'width': '100%' }}>
     <CardHeader className="border-bottom">
-      <h6 className="m-0">{title}</h6>
+      <Link to='/classes/cs130'><h6 className="m-0">{title}</h6></Link>
     </CardHeader>
     <ListGroup flush>
-      <ListGroupItem className="p-3">
-        {/* Course Title */}
-        <label htmlFor="feFirstName">Course Title</label>
-        <br />
-        <span>Computer Science 130</span>
-      </ListGroupItem>
-      <ListGroupItem className="p-3">
-        {/* Professor */}
-        <label htmlFor="feFirstName">Professor</label>
-        <br />
-        <span>Paul Eggert</span>
-      </ListGroupItem>
       <ListGroupItem className="p-3">
         {/* Number of Students */}
         <label htmlFor="feFirstName">Students Enrolled</label>
@@ -42,7 +31,7 @@ const OverviewCard = ({ title }) => (
         <label htmlFor="feFirstName">Description</label>
         <br />
         <span>
-          Great class that prepares you for the industry by teaching you how to be an exceptional software engineer
+          One of the many great classes taught by Professor Eggert
         </span>
       </ListGroupItem>
     </ListGroup>

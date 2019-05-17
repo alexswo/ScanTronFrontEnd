@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import Promise from 'bluebird';
 import {
   Container,
   Row,
@@ -38,8 +39,10 @@ class LoginView extends Component {
     this.setState({ submitted: true });
     const { username, password } = this.state;
     if (username !== '' && password !== '') {
-      sessionStorage.setItem('user', 'logged in')
-      this.props.history.push('/');
+      Promise.delay(1000).then(() => {
+        sessionStorage.setItem('user', 'logged in')
+        this.props.history.push('/');
+      });
     }
   }
 

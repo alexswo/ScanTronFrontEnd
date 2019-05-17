@@ -22,7 +22,7 @@ const AssignmentView = () => (
             </Col>
           </Row>
           <Row noGutters style={{ 'width': '100%' }} className="py-4">
-            <AssignmentCard />
+            <AssignmentCard title='Assignment 1'/>
           </Row>
         </Container>
       </Col>

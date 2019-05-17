@@ -1,10 +1,9 @@
 import React from 'react';
 import SideBar from '../components/layout/SideBar';
 import { Container, Row, Col } from "shards-react";
-import AssignmentCard from '../components/cards/AssignmentCard';
 import OverviewCard from '../components/cards/OverviewCard';
 
-const ClassView = () => (
+const ClassesView = () => (
   <Container fluid>
     <Row>
       <SideBar />
@@ -18,37 +17,33 @@ const ClassView = () => (
         <Container fluid className="main-content-container px-4">
           <Row className="page-header py-4">
             <Col xs="12" sm="4" className="text-center text-md-left mb-sm-0">
-              <span className="text-uppercase page-subtitle">Class Overview</span>
-              <h3 className="page-title">Com Sci 130</h3>
+              <span className="text-uppercase page-subtitle">Gradus</span>
+              <h3 className="page-title">Classes Overview</h3>
             </Col>
           </Row>
           <Row>
-            <Col lg={{ size: 9 }} md={{ size: 8 }}>
+            <Col lg={{ size: 10 }} md={{ size: 9 }}>
               <Row noGutters style={{ 'width': '100%' }} className="py-4">
-                <AssignmentCard title='SRS 1'/>
+                <OverviewCard title='CS130'/>
               </Row>
 
               <Row noGutters style={{ 'width': '100%' }} className="py-4">
-                <AssignmentCard title='SRS2'/>
+                <OverviewCard title='CS131'/>
               </Row>
 
               <Row noGutters style={{ 'width': '100%' }} className="py-4">
-                <AssignmentCard title='Midterm'/>
+                <OverviewCard title='CS35L'/>
               </Row>
 
               <Row noGutters style={{ 'width': '100%' }} className="py-4">
-                <AssignmentCard title='Project Presentation'/>
+                <OverviewCard title='CS33'/>
               </Row>
-            </Col>
-            <Col className='py-4'>
-              <OverviewCard />
             </Col>
           </Row>
-
         </Container>
       </Col>
     </Row>
   </Container>
 )
 
-export default ClassView;
+export default ClassesView;
