@@ -25,19 +25,19 @@ const StudentView = () => (
           <Row>
             <Col lg={{ size: 9 }} md={{ size: 8 }}>
               <Row noGutters style={{ 'width': '100%' }} className="py-4">
-                <AssignmentCard />
+                <AssignmentCard title='SRS 1'/>
               </Row>
 
               <Row noGutters style={{ 'width': '100%' }} className="py-4">
-                <AssignmentCard />
+                <AssignmentCard title='SRS2'/>
               </Row>
 
               <Row noGutters style={{ 'width': '100%' }} className="py-4">
-                <AssignmentCard />
+                <AssignmentCard title='Midterm'/>
               </Row>
 
               <Row noGutters style={{ 'width': '100%' }} className="py-4">
-                <AssignmentCard />
+                <AssignmentCard title='Project Presentation'/>
               </Row>
             </Col>
             <Col className='py-4'>

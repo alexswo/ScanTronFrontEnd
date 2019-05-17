@@ -28,7 +28,7 @@ class SideBar extends Component {
           </NavbarBrand>
         </Navbar>
         <Nav className="nav--no-borders flex-column">
-          <SideBarItem to='/class' name='Class' />
+          <SideBarItem to='/classes' name='Classes' />
           <SideBarItem to='/assignment' name='Assignments' />
           <SideBarItem to='/student' name='Students' />
           <SideBarItem to='/settings' name='Settings' />
