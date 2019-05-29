@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import { authentication as rootReducer } from './reducers';
+import rootReducer from './reducers';
 import { Routes } from './routes';
 import * as serviceWorker from './serviceWorker';
 import LoginView from './views/LoginView'
