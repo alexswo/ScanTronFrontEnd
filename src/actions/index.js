@@ -2,6 +2,13 @@ import { authHeader } from '../util';
 
 const apiUrl = 'http://scantronbackend-env.mzszeithxu.us-west-2.elasticbeanstalk.com';
 
+function handleErrors(response) {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    return response;
+}
+
 function login(email, password) {
   return dispatch => {
     // Send action indicating requesting login
@@ -21,6 +28,7 @@ function login(email, password) {
 
     // GET using fetch API
     fetch(`${url}?${query}`, requestOptions)
+    .then(handleErrors)
     .then((user) => {
       dispatch({ type: 'LOGIN_SUCCESS', user });
     })
@@ -33,7 +41,6 @@ function login(email, password) {
 
 function register(user) {
   return dispatch => {
-    console.log('attempt to register');
     // Send action indicating requesting registration
     dispatch({ type: 'REGISTER_REQUEST', user });
 
@@ -47,12 +54,14 @@ function register(user) {
 
     // POST using fetch API
     fetch(url, requestOptions)
+    .then(handleErrors)
     .then((response) => {
       dispatch({ type: 'VERIFY_REQUEST', email: user.email, firstName: user.firstName });
-      console.log(response);
+      dispatch({ type: 'REGISTER_SUCCESS' });
     })
     .catch((error) => {
       console.log(error);
+      dispatch({ type: 'REGISTER_FAIL', error });
     })
   }
 }
@@ -70,10 +79,13 @@ function verify(user) {
 
     // POST using fetch API
     fetch(url, requestOptions)
+    .then(handleErrors)
     .then((response) => {
+      dispatch({ type: 'VERIFY_SUCCESS' });
       console.log(response);
     })
     .catch((error) => {
+      dispatch({ type: 'VERIFY_FAIL', error });
       console.log(error);
     })
   }

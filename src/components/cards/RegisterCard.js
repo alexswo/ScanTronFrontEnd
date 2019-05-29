@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
@@ -53,25 +52,27 @@ class RegisterCard extends Component {
     this.setState({ submitted: true });
     const { user } = this.state;
     const { dispatch } = this.props;
-    if (user.firstName && user.lastName && user.email && user.password) {
+    if (user.firstName && user.lastName && user.email && user.password && user.password === user.passwordConf) {
       dispatch(actions.register(user));
     }
   }
 
   render() {
     const { user, submitted } = this.state;
+    const { error } = this.props;
     return (
       <Card className='mb-4' style={{
           'width' : '100%'
         }}>
         <CardHeader className='border-bottom'>
-          <h6 className='m-0'>{this.props.title}</h6>
+          <h6 className='m-0'>Register</h6>
         </CardHeader>
         <ListGroup flush={true}>
           <ListGroupItem className='p-3'>
             <Row>
               <Col>
                 <Form onSubmit={this.handleSubmit}>
+                  {error && <div className='help-block text-danger'>An account with the given email already exists!</div>}
                   <Row form={true}>
                     {/* First Name */}
                     <Col md='6' className='form-group'>
@@ -111,7 +112,7 @@ class RegisterCard extends Component {
                     <Col md='6' className='form-group'>
                       <label htmlFor='fePassword'>Confirm Password</label>
                       <FormInput name='passwordConf' value={user.passwordConf} onChange={this.handleChange} type='password' placeholder='Confirm Password'/>
-                      {submitted && !user.passwordConf && <div className='help-block text-danger'>Please confirm your password</div>}
+                      {submitted && (!user.passwordConf || user.passwordConf !== user.password) && <div className='help-block text-danger'>Please confirm your password</div>}
                     </Col>
                   </Row>
                   <Row>
@@ -133,12 +134,11 @@ class RegisterCard extends Component {
   )}
 }
 
-RegisterCard.propTypes = {
-  title: PropTypes.string
-};
+function mapStateToProps(state) {
+    const { error } = state.registration;
+    return {
+      error
+    };
+}
 
-RegisterCard.defaultProps = {
-  title: 'Register'
-};
-
-export default connect()(RegisterCard);
+export default connect(mapStateToProps)(RegisterCard);

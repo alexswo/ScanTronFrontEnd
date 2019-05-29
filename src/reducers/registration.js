@@ -5,7 +5,7 @@ export function registration(state = {}, action) {
     case 'REGISTER_SUCCESS':
       return {};
     case 'REGISTER_FAIL':
-      return {};
+      return { error: action.error };
     case 'VERIFY_REQUEST':
       return {
         verifying: true,
@@ -15,8 +15,8 @@ export function registration(state = {}, action) {
     case 'VERIFY_SUCCESS':
       return {};
     case 'VERIFY_FAIL':
-      return {};
+      return { error: action.error };
     default:
-      return state
+      return state;
   }
 }

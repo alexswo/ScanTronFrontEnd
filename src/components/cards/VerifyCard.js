@@ -78,9 +78,7 @@ class VerifyCard extends Component {
                 }} md={{
                   size: 9
                 }}>
-                <Link to='/verify'>
-                  <Button theme='accent'>Verify</Button>
-                </Link>
+                <Button theme='accent'>Verify</Button>
                 <Link to='/login' className="btn btn-link">Cancel</Link>
               </Col>
             </Row>

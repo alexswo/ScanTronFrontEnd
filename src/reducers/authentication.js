@@ -15,7 +15,7 @@ export function authentication(state = initialState, action) {
       };
     case 'LOGIN_FAIL':
       return {
-        loginError: action.error
+        error: action.error
       };
     case 'LOGOUT':
       return {};
