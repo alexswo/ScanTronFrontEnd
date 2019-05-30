@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   Container,
   Row,
@@ -9,13 +10,14 @@ import {
   ListGroup,
   ListGroupItem,
 } from 'shards-react';
+import actions from '../actions';
 
 class LoginView extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      username: '',
+      email: '',
       password: '',
       submitted: false,
       userDetails: {
@@ -30,20 +32,24 @@ class LoginView extends Component {
 
   handleChange(e) {
     const { name, value } = e.target;
-    this.setState({ [name]: value });
+    this.setState({
+      ...this.state,
+      [name]: value
+    });
   }
 
   handleSubmit(e) {
     e.preventDefault();
     this.setState({ submitted: true });
-    const { username, password } = this.state;
-    if (username !== '' && password !== '') {
-
+    const { email, password } = this.state;
+    const { dispatch } = this.props;
+    if (email !== '' && password !== '') {
+      dispatch(actions.login({ email, password }))
     }
   }
 
   render() {
-    const { username, password, submitted, userDetails } = this.state;
+    const { email, password, submitted, userDetails } = this.state;
 
     return (
       <Container fluid>
@@ -60,11 +66,11 @@ class LoginView extends Component {
               <ListGroup flush>
                 <ListGroupItem className='px-4'>
                   <form name='form' onSubmit={this.handleSubmit}>
-                    <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
-                      <label htmlFor='username'>Username</label>
-                      <input type='text' className='form-control' name='username' value={username} onChange={this.handleChange} />
-                      {submitted && !username &&
-                        <div className='help-block'>Username is required</div>}
+                    <div className={'form-group' + (submitted && !email ? ' has-error' : '')}>
+                      <label htmlFor='email'>Email</label>
+                      <input type='text' className='form-control' name='email' value={email} onChange={this.handleChange} />
+                      {submitted && !email &&
+                        <div className='help-block'>Email is required</div>}
                     </div>
                     <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
                       <label htmlFor='password'>Password</label>
@@ -88,4 +94,4 @@ class LoginView extends Component {
   }
 }
 
-export default withRouter(LoginView);
+export default connect()(LoginView);

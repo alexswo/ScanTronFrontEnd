@@ -69,17 +69,17 @@ class VerifyCard extends Component {
                       {submitted && !confirmCode && <div className='help-block text-danger'>Verification Code is required</div>}
                     </Col>
                   </Row>
+                  <Row>
+                    <Col lg={{
+                        size: 10
+                      }} md={{
+                        size: 9
+                      }}>
+                      <Button theme='accent'>Verify</Button>
+                      <Link to='/login' className='btn btn-link'>Cancel</Link>
+                    </Col>
+                  </Row>
                 </Form>
-              </Col>
-            </Row>
-            <Row>
-              <Col lg={{
-                  size: 10
-                }} md={{
-                  size: 9
-                }}>
-                <Button theme='accent'>Verify</Button>
-                <Link to='/login' className='btn btn-link'>Cancel</Link>
               </Col>
             </Row>
           </ListGroupItem>

@@ -1,24 +1,18 @@
 import { authHeader } from '../util';
+import history from '../history';
 
 const apiUrl = 'http://scantronbackend-env.mzszeithxu.us-west-2.elasticbeanstalk.com';
 
-function handleErrors(response) {
-    if (!response.ok) {
-        throw Error(response.statusText);
-    }
-    return response;
-}
-
-function login(email, password) {
+function login(user) {
   return dispatch => {
     // Send action indicating requesting login
-    dispatch({ type: 'LOGIN_REQUEST', email });
+    dispatch({ type: 'LOGIN_REQUEST', email: user.email });
 
     // Set up GET request
     const url = `${apiUrl}/authentication/login`;
     const params = new URLSearchParams();
-    params.set('email', email);
-    params.set('password', password);
+    params.set('email', user.email);
+    params.set('password', user.password);
     const query = params.toString();
 
     const requestOptions = {
@@ -28,9 +22,12 @@ function login(email, password) {
 
     // GET using fetch API
     fetch(`${url}?${query}`, requestOptions)
-    .then(handleErrors)
-    .then((user) => {
-      dispatch({ type: 'LOGIN_SUCCESS', user });
+    .then((response) => {
+      return response.json();
+    })
+    .then((token) => {
+      localStorage.setItem('user', JSON.stringify(token));
+      history.push('/');
     })
     .catch((error) => {
       console.log(error);
@@ -54,10 +51,13 @@ function register(user) {
 
     // POST using fetch API
     fetch(url, requestOptions)
-    .then(handleErrors)
     .then((response) => {
+      if (!response.ok) {
+          throw Error(response.statusText);
+      }
+      console.log('sending dispatch messages');
       dispatch({ type: 'VERIFY_REQUEST', email: user.email, firstName: user.firstName });
-      dispatch({ type: 'REGISTER_SUCCESS' });
+      // dispatch({ type: 'REGISTER_SUCCESS' });
     })
     .catch((error) => {
       console.log(error);
@@ -79,14 +79,18 @@ function verify(user) {
 
     // POST using fetch API
     fetch(url, requestOptions)
-    .then(handleErrors)
     .then((response) => {
+      if (!response.ok) {
+          throw Error(response.statusText);
+      }
       dispatch({ type: 'VERIFY_SUCCESS' });
       console.log(response);
+      history.push('/login');
     })
     .catch((error) => {
       dispatch({ type: 'VERIFY_FAIL', error });
       console.log(error);
+      history.push('/register')
     })
   }
 }

@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import rootReducer from './reducers';
 import { Routes } from './routes';
+import history from "./history";
 import * as serviceWorker from './serviceWorker';
 import LoginView from './views/LoginView'
 
@@ -22,7 +23,7 @@ const store = createStore(
 const rootElement = document.getElementById('root');
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <Router history={history}>
       <Routes />
       <Route path='/login' component={ LoginView } />
     </Router>

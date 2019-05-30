@@ -5,6 +5,7 @@
   "dependencies": {
     "bluebird": "^3.5.4",
     "chart.js": "^2.8.0",
+    "history": "^4.9.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
