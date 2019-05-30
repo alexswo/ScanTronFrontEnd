@@ -6,28 +6,28 @@ class SideBar extends Component {
   render() {
     return (
       <Col
-        tag="aside"
-        className="main-sidebar px-0 col-12"
+        tag='aside'
+        className='main-sidebar px-0 col-12'
         lg={{ size: 2 }}
         md={{ size: 3 }}
       >
         <Navbar
-          className="align-items-stretch bg-white flex-md-nowrap border-bottom p-0"
-          type="light"
+          className='align-items-stretch bg-white flex-md-nowrap border-bottom p-0'
+          type='light'
         >
           <NavbarBrand
-            className="w-100 mr-0"
+            className='w-100 mr-0'
             href='/'
-            style={{ lineHeight: "35px" }}
+            style={{ lineHeight: '35px' }}
           >
-            <div className="d-table m-auto">
-              <span className="d-none d-md-inline ml-1">
+            <div className='d-table m-auto'>
+              <span className='d-none d-md-inline ml-1'>
                 Gradus
               </span>
             </div>
           </NavbarBrand>
         </Navbar>
-        <Nav className="nav--no-borders flex-column">
+        <Nav className='nav--no-borders flex-column'>
           <SideBarItem to='/classes' name='Classes' />
           <SideBarItem to='/assignment' name='Assignments' />
           <SideBarItem to='/student' name='Students' />

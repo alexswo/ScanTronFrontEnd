@@ -122,7 +122,7 @@ class RegisterCard extends Component {
                         size: 9
                       }}>
                       <Button theme='accent'>Register</Button>
-                      <Link to='/login' className="btn btn-link">Cancel</Link>
+                      <Link to='/login' className='btn btn-link'>Cancel</Link>
                     </Col>
                   </Row>
                 </Form>

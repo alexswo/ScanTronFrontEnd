@@ -19,8 +19,8 @@ class LoginView extends Component {
       password: '',
       submitted: false,
       userDetails: {
-       name: "Gradus",
-       jobTitle: "Login",
+       name: 'Gradus',
+       jobTitle: 'Login',
      }
     };
 
@@ -50,31 +50,31 @@ class LoginView extends Component {
         <Row noGutters>
           <Col />
           <Col className='my-4'>
-            <Card small className="mb-4 pt-3">
-              <CardHeader className="border-bottom text-center">
-                <div className="mb-3 mx-auto">
+            <Card small className='mb-4 pt-3'>
+              <CardHeader className='border-bottom text-center'>
+                <div className='mb-3 mx-auto'>
                 </div>
-                <h4 className="mb-0">{userDetails.name}</h4>
-                <span className="text-muted d-block mb-2">{userDetails.jobTitle}</span>
+                <h4 className='mb-0'>{userDetails.name}</h4>
+                <span className='text-muted d-block mb-2'>{userDetails.jobTitle}</span>
               </CardHeader>
               <ListGroup flush>
-                <ListGroupItem className="px-4">
-                  <form name="form" onSubmit={this.handleSubmit}>
+                <ListGroupItem className='px-4'>
+                  <form name='form' onSubmit={this.handleSubmit}>
                     <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
-                      <label htmlFor="username">Username</label>
-                      <input type="text" className="form-control" name="username" value={username} onChange={this.handleChange} />
+                      <label htmlFor='username'>Username</label>
+                      <input type='text' className='form-control' name='username' value={username} onChange={this.handleChange} />
                       {submitted && !username &&
-                        <div className="help-block">Username is required</div>}
+                        <div className='help-block'>Username is required</div>}
                     </div>
                     <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
-                      <label htmlFor="password">Password</label>
-                      <input type="password" className="form-control" name="password" value={password} onChange={this.handleChange} />
+                      <label htmlFor='password'>Password</label>
+                      <input type='password' className='form-control' name='password' value={password} onChange={this.handleChange} />
                       {submitted && !password &&
-                        <div className="help-block">Password is required</div>}
+                        <div className='help-block'>Password is required</div>}
                     </div>
-                    <div className="form-group">
-                      <button className="btn btn-primary">Login</button>
-                      <Link to="/register" className="btn btn-link">Register</Link>
+                    <div className='form-group'>
+                      <button className='btn btn-primary'>Login</button>
+                      <Link to='/register' className='btn btn-link'>Register</Link>
                     </div>
                   </form>
                 </ListGroupItem>

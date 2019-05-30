@@ -79,7 +79,7 @@ class VerifyCard extends Component {
                   size: 9
                 }}>
                 <Button theme='accent'>Verify</Button>
-                <Link to='/login' className="btn btn-link">Cancel</Link>
+                <Link to='/login' className='btn btn-link'>Cancel</Link>
               </Col>
             </Row>
           </ListGroupItem>
