@@ -23,6 +23,9 @@ function login(user) {
     // GET using fetch API
     fetch(`${url}?${query}`, requestOptions)
     .then((response) => {
+      if (!response.ok) {
+          throw Error(response.statusText);
+      }
       return response.json();
     })
     .then((token) => {
