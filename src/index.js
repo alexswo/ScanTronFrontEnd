@@ -1,20 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import rootReducer from './reducers';
 import { Routes } from './routes';
+import history from "./history";
 import * as serviceWorker from './serviceWorker';
 import LoginView from './views/LoginView'
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./shards.min.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './shards.min.css';
+
+const store = createStore(
+  rootReducer,
+  applyMiddleware(
+    thunkMiddleware
+  )
+);
 
 const rootElement = document.getElementById('root');
 ReactDOM.render(
-    <Router>
+  <Provider store={store}>
+    <Router history={history}>
       <Routes />
       <Route path='/login' component={ LoginView } />
-    </Router>,
-    rootElement
+    </Router>
+  </Provider>,
+  rootElement
 );
 
 // If you want your app to work offline and load faster, you can change
