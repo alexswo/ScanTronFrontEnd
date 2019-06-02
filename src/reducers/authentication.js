@@ -1,4 +1,4 @@
-let jsonWebToken = JSON.parse(localStorage.getItem('jwt'));
+let jsonWebToken = JSON.parse(localStorage.getItem('user'));
 const initialState = jsonWebToken ? { loggedIn: true } : {};
 
 export function authentication(state = initialState, action) {

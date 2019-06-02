@@ -1,7 +1,28 @@
-import { authHeader } from '../util';
+import util from '../util';
 import history from '../history';
 
 const apiUrl = 'http://scantronbackend-env.mzszeithxu.us-west-2.elasticbeanstalk.com';
+
+function logout() {
+  localStorage.removeItem('user');
+  // dispatch({ type: 'LOGOUT' });
+
+  window.location.reload();
+}
+
+function handleResponse(response) {
+  return response.text().then((text) => {
+    if (!response.ok) {
+      if (response.status === 401) {
+        logout();
+      }
+
+      const errorMsg = response.statusText;
+      return Promise.reject(errorMsg);
+    }
+    return text && JSON.parse(text);
+  });
+}
 
 function login(user) {
   return dispatch => {
@@ -15,21 +36,14 @@ function login(user) {
     params.set('password', user.password);
     const query = params.toString();
 
-    const requestOptions = {
-      method: 'GET',
-      headers: authHeader(),
-    };
-
     // GET using fetch API
-    fetch(`${url}?${query}`, requestOptions)
-    .then((response) => {
-      if (!response.ok) {
-          throw Error(response.statusText);
-      }
-      return response.json();
-    })
+    fetch(`${url}?${query}`, { method: 'GET' })
+    .then(handleResponse)
     .then((token) => {
+      console.log('setting JWT token and redirecting to home');
       localStorage.setItem('user', JSON.stringify(token));
+      // GET user info
+      // dispatch(getUser(user));
       history.push('/');
     })
     .catch((error) => {
@@ -54,13 +68,10 @@ function register(user) {
 
     // POST using fetch API
     fetch(url, requestOptions)
+    .then(handleResponse)
     .then((response) => {
-      if (!response.ok) {
-          throw Error(response.statusText);
-      }
-      console.log('sending dispatch messages');
+      console.log('sending VERIFY_REQUEST messages');
       dispatch({ type: 'VERIFY_REQUEST', email: user.email, firstName: user.firstName });
-      // dispatch({ type: 'REGISTER_SUCCESS' });
     })
     .catch((error) => {
       console.log(error);
@@ -82,12 +93,10 @@ function verify(user) {
 
     // POST using fetch API
     fetch(url, requestOptions)
+    .then(handleResponse)
     .then((response) => {
-      if (!response.ok) {
-          throw Error(response.statusText);
-      }
+      console.log(`dispatching VERIFY_SUCCESS, received ${response}`);
       dispatch({ type: 'VERIFY_SUCCESS' });
-      console.log(response);
       history.push('/login');
     })
     .catch((error) => {
@@ -98,8 +107,36 @@ function verify(user) {
   }
 }
 
+function getUser(user) {
+  return dispatch => {
+    // Set up GET reqeust
+    console.log(util.authHeader());
+    const url = `${apiUrl}/user/${user.email}`;
+    const requestOptions = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        // ...util.authHeader(),
+      }
+    };
+
+    // GET using fetch API
+    fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      console.log(`dispatching GET_USER, recived ${response}`);
+      dispatch({ type: 'GET_USER', userInfo: response });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+}
+
 export default {
+    logout,
     login,
     register,
-    verify
+    verify,
+    getUser,
 };
