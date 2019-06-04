@@ -1,6 +1,4 @@
 import history from '../history';
-import util from '../util';
-
 const apiUrl = 'http://scantronbackend-env.mzszeithxu.us-west-2.elasticbeanstalk.com';
 
 function logout() {
