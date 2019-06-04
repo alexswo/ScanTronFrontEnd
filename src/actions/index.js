@@ -111,9 +111,6 @@ function getUser(user) {
     const requestOptions = {
       method: 'GET',
       credentials: 'include',
-      header: {
-        'Cookie': `jwt=${util.getJwt()}`,
-      }
     };
 
     // GET using fetch API
