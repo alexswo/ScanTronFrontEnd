@@ -1,13 +1,13 @@
-import util from '../util';
 import history from '../history';
+import util from '../util';
 
 const apiUrl = 'http://scantronbackend-env.mzszeithxu.us-west-2.elasticbeanstalk.com';
 
 function logout() {
-  localStorage.removeItem('user');
-  // dispatch({ type: 'LOGOUT' });
-
-  window.location.reload();
+  return dispatch => {
+    dispatch({ type: 'LOGOUT' });
+    // window.location.reload();
+  }
 }
 
 function handleResponse(response) {
@@ -37,13 +37,12 @@ function login(user) {
     const query = params.toString();
 
     // GET using fetch API
-    fetch(`${url}?${query}`, { method: 'GET' })
+    fetch(`${url}?${query}`, { method: 'GET', credentials: 'include', })
     .then(handleResponse)
     .then((token) => {
-      console.log('setting JWT token and redirecting to home');
-      localStorage.setItem('user', JSON.stringify(token));
+      dispatch({ type: 'LOGIN_SUCCESS', user });
       // GET user info
-      // dispatch(getUser(user));
+      dispatch(getUser(user));
       history.push('/');
     })
     .catch((error) => {
@@ -110,13 +109,12 @@ function verify(user) {
 function getUser(user) {
   return dispatch => {
     // Set up GET reqeust
-    console.log(util.authHeader());
     const url = `${apiUrl}/user/${user.email}`;
     const requestOptions = {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        // ...util.authHeader(),
+      credentials: 'include',
+      header: {
+        'Cookie': `jwt=${util.getJwt()}`,
       }
     };
 
@@ -124,7 +122,7 @@ function getUser(user) {
     fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      console.log(`dispatching GET_USER, recived ${response}`);
+      console.log(`dispatching GET_USER, received ${response}`);
       dispatch({ type: 'GET_USER', userInfo: response });
     })
     .catch((error) => {

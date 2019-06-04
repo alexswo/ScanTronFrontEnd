@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import SideBarItem from './SideBarItem.js';
 import { Nav, Col, NavbarBrand, Navbar } from 'shards-react';
+import actions from '../../actions';
 
 class SideBar extends Component {
   render() {
+    const { dispatch } = this.props;
     return (
       <Col
         tag='aside'
@@ -32,10 +35,11 @@ class SideBar extends Component {
           <SideBarItem to='/assignment' name='Assignments' />
           <SideBarItem to='/student' name='Students' />
           <SideBarItem to='/settings' name='Settings' />
+          <SideBarItem to='/login' name='Logout' handleClick={ () => dispatch(actions.logout()) }/>
         </Nav>
       </Col>
     );
   }
 }
 
-export default SideBar;
+export default connect()(SideBar);

@@ -6,7 +6,7 @@ import { NavItem, NavLink } from 'shards-react';
 
 const SideBarItem = (props) => (
   <NavItem>
-    <NavLink tag={RouteNavLink} to={props.to}>
+    <NavLink tag={RouteNavLink} to={props.to} onClick={props.handleClick}>
       {props.name && <span>{props.name}</span>}
     </NavLink>
   </NavItem>

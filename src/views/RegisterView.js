@@ -24,10 +24,10 @@ const RegisterView = (props) => {
 }
 
 function mapStateToProps(state) {
-    const { verifying } = state.registration;
-    return {
-        verifying
-    };
+  const { verifying } = state.registration;
+  return {
+      verifying
+  };
 }
 
 export default connect(mapStateToProps)(RegisterView);
