@@ -64,13 +64,13 @@ class LoginView extends Component {
                 <ListGroupItem className='px-4'>
                   {error && <div className='help-block text-danger'>Incorrect email or password!</div>}
                   <form name='form' onSubmit={this.handleSubmit}>
-                    <div className={'form-group' + (submitted && !email ? ' has-error' : '')}>
+                    <div className='form-group'>
                       <label htmlFor='email'>Email</label>
                       <input type='text' className='form-control' name='email' value={email} onChange={this.handleChange} />
                       {submitted && !email &&
                         <div className='help-block text-danger'>Email is required</div>}
                     </div>
-                    <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
+                    <div className='form-group'>
                       <label htmlFor='password'>Password</label>
                       <input type='password' className='form-control' name='password' value={password} onChange={this.handleChange} />
                       {submitted && !password &&
