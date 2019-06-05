@@ -48,9 +48,9 @@ class CreateCourseCard extends Component {
 
     this.setState({ submitted: true });
     const { course } = this.state;
-    const { dispatch, email } = this.props;
+    const { dispatch, user } = this.props;
     if (course.name && course.description) {
-      dispatch(actions.createCourse({ email }, course));
+      dispatch(actions.createCourse(user, course));
     }
     this.setState({
       course: {
@@ -102,7 +102,7 @@ class CreateCourseCard extends Component {
 
 function mapStateToProps(state) {
   return {
-    email: state.authentication.user.email,
+    user: state.authentication.user,
   }
 }
 

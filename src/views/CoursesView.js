@@ -12,8 +12,8 @@ import actions from '../actions';
 
 class CoursesView extends Component {
   componentDidMount() {
-    const { dispatch, email } = this.props;
-    dispatch(actions.getAllCourses({ email }));
+    const { dispatch, user } = this.props;
+    dispatch(actions.getAllCourses(user));
   }
 
   render() {
@@ -57,7 +57,7 @@ class CoursesView extends Component {
 function mapStateToProps(state) {
   return {
     ...state.courses,
-    email: state.authentication.user.email,
+    user: state.authentication.user,
   }
 }
 

@@ -20,10 +20,10 @@ class SettingsCard extends Component {
 
     this.state = {
       user: {
-        firstName: props.firstName,
-        lastName: props.lastName,
-        school: props.school,
-        email: props.email,
+        firstName: '',
+        lastName: '',
+        school: '',
+        email: '',
       },
       changed: false,
     };
@@ -56,14 +56,13 @@ class SettingsCard extends Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    const { user } = this.state;
+    const { dispatch, user } = this.props;
     dispatch(actions.getUser(user));
   }
 
   render() {
     const { user } = this.state;
-    const { email } = this.props;
+    const { email, firstName, lastName, school } = this.props;
     return (
       <Card className='mb-4' style={ { 'width': '100%' } }>
         <CardHeader className='border-bottom'>
@@ -82,6 +81,7 @@ class SettingsCard extends Component {
                         name='firstName'
                         value={ user.firstName }
                         onChange={ this.handleChange }
+                        placeholder={ firstName }
                       />
                     </Col>
                     {/* Last Name */}
@@ -91,6 +91,7 @@ class SettingsCard extends Component {
                         name='lastName'
                         value={ user.lastName }
                         onChange={ this.handleChange }
+                        placeholder={ lastName }
                       />
                     </Col>
                   </Row>
@@ -102,6 +103,7 @@ class SettingsCard extends Component {
                         name='school'
                         value={ user.school }
                         onChange={ this.handleChange }
+                        placeholder={ school }
                       />
                     </Col>
                     {/* Email */}
@@ -124,7 +126,7 @@ class SettingsCard extends Component {
 function mapStateToProps(state) {
   return {
     ...state.user,
-    email: state.authentication.user.email,
+    user: state.authentication.user,
   };
 }
 
