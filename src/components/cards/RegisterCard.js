@@ -76,13 +76,13 @@ class RegisterCard extends Component {
                   <Row form={true}>
                     {/* First Name */}
                     <Col md='6' className='form-group'>
-                      <label htmlFor='feFirstName'>First Name</label>
+                      <label htmlFor='firstName'>First Name</label>
                       <FormInput name='firstName' value={user.firstName} onChange={this.handleChange} placeholder='First Name'/>
                       {submitted && !user.firstName && <div className='help-block text-danger'>First Name is required</div>}
                     </Col>
                     {/* Last Name */}
                     <Col md='6' className='form-group'>
-                      <label htmlFor='feLastName'>Last Name</label>
+                      <label htmlFor='lastName'>Last Name</label>
                       <FormInput name='lastName' value={user.lastName} onChange={this.handleChange} placeholder='Last Name'/>
                       {submitted && !user.lastName && <div className='help-block text-danger'>Last Name is required</div>}
                     </Col>
@@ -90,13 +90,13 @@ class RegisterCard extends Component {
                   <Row form={true}>
                     {/* Email */}
                     <Col md='6' className='form-group'>
-                      <label htmlFor='feEmail'>Email</label>
+                      <label htmlFor='email'>Email</label>
                       <FormInput name='email' value={user.email} onChange={this.handleChange} type='email' placeholder='Email Address' autoComplete='email'/>
                       {submitted && !user.email && <div className='help-block text-danger'>Email is required</div>}
                     </Col>
                     {/* School */}
                     <Col md='6' className='form-group'>
-                      <label htmlFor='feCity'>School</label>
+                      <label htmlFor='school'>School</label>
                       <FormInput name='school' value={user.school} onChange={this.handleChange} id='feCity' placeholder='School'/>
                       {submitted && !user.school && <div className='help-block text-danger'>School is required</div>}
                     </Col>
@@ -104,13 +104,13 @@ class RegisterCard extends Component {
                   <Row form={true}>
                     {/* Password */}
                     <Col md='6' className='form-group'>
-                      <label htmlFor='fePassword'>Password</label>
+                      <label htmlFor='password'>Password</label>
                       <FormInput name='password' value={user.password} onChange={this.handleChange} type='password' placeholder='Password'/>
                       {submitted && !user.password && <div className='help-block text-danger'>Password is required</div>}
                     </Col>
                     {/* Confirm Password */}
                     <Col md='6' className='form-group'>
-                      <label htmlFor='fePassword'>Confirm Password</label>
+                      <label htmlFor='passwordConf'>Confirm Password</label>
                       <FormInput name='passwordConf' value={user.passwordConf} onChange={this.handleChange} type='password' placeholder='Confirm Password'/>
                       {submitted && (!user.passwordConf || user.passwordConf !== user.password) && <div className='help-block text-danger'>Please confirm your password</div>}
                     </Col>
