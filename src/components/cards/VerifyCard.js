@@ -50,31 +50,25 @@ class VerifyCard extends Component {
   render() {
     const { confirmCode, submitted } = this.state;
     return (
-      <Card className='mb-4' style={{
-          'width' : '100%'
-        }}>
+      <Card className='mb-4' style={ { 'width' : '100%' } }>
         <CardHeader className='border-bottom'>
-          <h6 className='m-0'>Welcome {this.props.firstName}! Please Verify your account</h6>
+          <h6 className='m-0'>Welcome { this.props.firstName }! Please Verify your account</h6>
         </CardHeader>
-        <ListGroup flush={true}>
+        <ListGroup flush={ true }>
           <ListGroupItem className='p-3'>
             <Row>
               <Col>
-                <Form onSubmit={this.handleSubmit}>
-                  <Row form={true}>
+                <Form onSubmit={ this.handleSubmit }>
+                  <Row form={ true }>
                     {/* Verification Code */}
                     <Col md='6' className='form-group'>
                       <label htmlFor='feFirstName'>Verification Code</label>
-                      <FormInput name='confirmCode' value={confirmCode} onChange={this.handleChange} placeholder='Verification Code'/>
-                      {submitted && !confirmCode && <div className='help-block text-danger'>Verification Code is required</div>}
+                      <FormInput name='confirmCode' value={ confirmCode } onChange={ this.handleChange } placeholder='Verification Code'/>
+                      { submitted && !confirmCode && <div className='help-block text-danger'>Verification Code is required</div> }
                     </Col>
                   </Row>
                   <Row>
-                    <Col lg={{
-                        size: 10
-                      }} md={{
-                        size: 9
-                      }}>
+                    <Col lg={ { size: 10 } } md={ { size: 9 } }>
                       <Button theme='accent'>Verify</Button>
                       <Link to='/login' className='btn btn-link'>Cancel</Link>
                     </Col>
@@ -89,12 +83,12 @@ class VerifyCard extends Component {
 }
 
 function mapStateToProps(state) {
-    const { verifying, email, firstName } = state.registration;
-    return {
-        verifying,
-        email,
-        firstName
-    };
+  const { verifying, email, firstName } = state.registration;
+  return {
+    verifying,
+    email,
+    firstName
+  };
 }
 
 export default connect(mapStateToProps)(VerifyCard);

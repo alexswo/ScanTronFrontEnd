@@ -106,7 +106,7 @@ function verify(user) {
 
 function getUser(user) {
   return dispatch => {
-    // Set up GET reqeust
+    // Set up GET request
     const url = `${apiUrl}/user/${user.email}`;
     const requestOptions = {
       method: 'GET',
@@ -117,10 +117,34 @@ function getUser(user) {
     fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      console.log(`dispatching GET_USER, received ${response}`);
+      console.log(`dispatching GET_USER`);
       dispatch({ type: 'GET_USER', userInfo: response });
     })
     .catch((error) => {
+      console.log(error);
+    })
+  }
+}
+
+function updateUser(user) {
+  return dispatch => {
+    // Set up GET request
+    const url =  `${apiUrl}/user/${user.email}`;
+    const requestOptions = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(user),
+    };
+
+    // PUT using fetch API
+    fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      console.log(`updated user, GET updated data`);
+      dispatch(getUser(user));
+    })
+    .catch((error) =>{
       console.log(error);
     })
   }
@@ -132,4 +156,5 @@ export default {
     register,
     verify,
     getUser,
+    updateUser,
 };
