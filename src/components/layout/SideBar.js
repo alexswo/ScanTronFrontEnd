@@ -31,9 +31,8 @@ class SideBar extends Component {
           </NavbarBrand>
         </Navbar>
         <Nav className='nav--no-borders flex-column'>
-          <SideBarItem to='/classes' name='Classes' />
+          <SideBarItem to='/classes' name='Courses' />
           <SideBarItem to='/assignment' name='Assignments' />
-          <SideBarItem to='/student' name='Students' />
           <SideBarItem to='/settings' name='Settings' />
           <SideBarItem to='/login' name='Logout' handleClick={ () => dispatch(actions.logout()) }/>
         </Nav>

@@ -39,8 +39,6 @@ function login(user) {
     .then(handleResponse)
     .then((token) => {
       dispatch({ type: 'LOGIN_SUCCESS', user });
-      // GET user info
-      dispatch(getUser(user));
       history.push('/');
     })
     .catch((error) => {
@@ -128,8 +126,8 @@ function getUser(user) {
 
 function updateUser(user) {
   return dispatch => {
-    // Set up GET request
-    const url =  `${apiUrl}/user/${user.email}`;
+    // Set up PUT request
+    const url = `${apiUrl}/user/${user.email}`;
     const requestOptions = {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -150,6 +148,51 @@ function updateUser(user) {
   }
 }
 
+function getAllCourses(user) {
+  return dispatch => {
+    // Set up GET request
+    const url = `${apiUrl}/course/${user.email}`;
+    const requestOptions = {
+      method: 'GET',
+      credentials: 'include',
+    };
+
+    // GET using fetch API
+    fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      dispatch({ type: 'ALL_COURSES', courses: response });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+}
+
+function createCourse(user, course) {
+  return dispatch => {
+    // Set up POST request
+    const url = `${apiUrl}/course/${user.email}`;
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(course),
+    };
+
+    // POST using fetch API
+    fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      console.log('made new course, getting updated list');
+      dispatch(getAllCourses(user));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+}
+
 export default {
     logout,
     login,
@@ -157,4 +200,6 @@ export default {
     verify,
     getUser,
     updateUser,
+    getAllCourses,
+    createCourse,
 };

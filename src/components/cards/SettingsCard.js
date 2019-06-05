@@ -55,6 +55,12 @@ class SettingsCard extends Component {
     }
   }
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+    const { user } = this.state;
+    dispatch(actions.getUser(user));
+  }
+
   render() {
     const { user } = this.state;
     const { email } = this.props;
@@ -116,7 +122,10 @@ class SettingsCard extends Component {
 }
 
 function mapStateToProps(state) {
-  return state.user;
+  return {
+    ...state.user,
+    email: state.authentication.user.email,
+  };
 }
 
 export default connect(mapStateToProps)(SettingsCard);
