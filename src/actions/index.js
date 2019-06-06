@@ -3,6 +3,7 @@ const apiUrl = 'http://scantronbackend-env.mzszeithxu.us-west-2.elasticbeanstalk
 
 function logout() {
   return dispatch => {
+    localStorage.removeItem('user');
     dispatch({ type: 'LOGOUT' });
     // window.location.reload();
   }
@@ -38,6 +39,7 @@ function login(user) {
     fetch(`${url}?${query}`, { method: 'GET', credentials: 'include', })
     .then(handleResponse)
     .then((token) => {
+      localStorage.setItem('user', JSON.stringify(user));
       dispatch({ type: 'LOGIN_SUCCESS', user });
       history.push('/');
     })

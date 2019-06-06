@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import CoursesView from './views/CoursesView.js';
 import AssignmentView from './views/AssignmentView.js';
@@ -10,14 +9,13 @@ import LoginView from './views/LoginView';
 
 class Routes extends Component {
   render() {
-    const { loggedIn } = this.props;
     return (
       <div>
         <Switch>
-          <Route exact path='/' render={ (props) => loggedIn ? <CoursesView  {...props } /> : <Redirect to='/login' /> } />
-          <Route path='/courses' render={ (props) => loggedIn ? <CoursesView {...props } /> : <Redirect to='/login' /> } />
-          <Route path='/course/:courseId' render={ (props) => loggedIn ? <AssignmentView {...props } /> : <Redirect to='/login' /> } />
-          <Route path='/settings' render={ (props) => loggedIn ? <SettingsView {...props } /> : <Redirect to='/login' /> } />
+          <Route exact path='/' render={ (props) => localStorage.getItem('user') ? <CoursesView  {...props } /> : <Redirect to='/login' /> } />
+          <Route path='/courses' render={ (props) => localStorage.getItem('user') ? <CoursesView {...props } /> : <Redirect to='/login' /> } />
+          <Route path='/course/:courseId' render={ (props) => localStorage.getItem('user') ? <AssignmentView {...props } /> : <Redirect to='/login' /> } />
+          <Route path='/settings' render={ (props) => localStorage.getItem('user') ? <SettingsView {...props } /> : <Redirect to='/login' /> } />
           <Route path='/register' component={ RegisterView } />
           <Route path='/verify' component={ VerifyView } />
           <Route path='/login' component={ LoginView }/>
@@ -28,11 +26,4 @@ class Routes extends Component {
   }
 };
 
-function mapStateToProps(state) {
-  const { loggedIn } = state.authentication;
-  return {
-      loggedIn
-  };
-}
-
-export default connect(mapStateToProps)(Routes);
+export default Routes;
