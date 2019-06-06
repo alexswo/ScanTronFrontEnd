@@ -65,14 +65,14 @@ class CreateCourseCard extends Component {
     const { course } = this.state;
     return(
       <div className='py-4'>
-        <Button onClick={this.toggle}>Create Course</Button>
-        <Collapse open={this.state.collapse}>
+        <Button onClick={ this.toggle }>Create Course</Button>
+        <Collapse open={ this.state.collapse }>
           <div className="p-3 mt-3 border rounded">
             <Form onSubmit={ this.handleSubmit }>
               <Row form>
-                {/* First Name */}
+                {/* Course Name */}
                 <Col md='6' className='form-group'>
-                  <label htmlFor='firstName'>Course Name</label>
+                  <label htmlFor='name'>Course Name</label>
                   <FormInput
                     name='name'
                     value={ course.name }
@@ -81,7 +81,7 @@ class CreateCourseCard extends Component {
                 </Col>
               </Row>
               <Row form>
-                {/* Last Name */}
+                {/* Description */}
                 <Col md='6' className='form-group'>
                   <label htmlFor='description'>Description</label>
                   <FormTextarea

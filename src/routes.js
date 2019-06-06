@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import CoursesView from './views/CoursesView.js';
 import AssignmentView from './views/AssignmentView.js';
 import SettingsView from './views/SettingsView.js';
 import RegisterView from './views/RegisterView.js';
+import VerifyView from './views/VerifyView.js';
 import LoginView from './views/LoginView';
 
 class Routes extends Component {
@@ -12,16 +13,19 @@ class Routes extends Component {
     const { loggedIn } = this.props;
     return (
       <div>
-        <Route exact path='/' render={ () => loggedIn ? <CoursesView /> : <Redirect to='/login' /> } />
-        <Route path='/classes' render={ () => loggedIn ? <CoursesView /> : <Redirect to='/login' /> } />
-        <Route path='/assignment' render={ () => loggedIn ? <AssignmentView /> : <Redirect to='/login' /> } />
-        <Route path='/settings' render={ () => loggedIn ? <SettingsView /> : <Redirect to='/login' /> } />
-        <Route path='/register' component={ RegisterView } />
-        <Route path='/login' component={ LoginView }/>
+        <Switch>
+          <Route exact path='/' render={ (props) => loggedIn ? <CoursesView  {...props } /> : <Redirect to='/login' /> } />
+          <Route path='/courses' render={ (props) => loggedIn ? <CoursesView {...props } /> : <Redirect to='/login' /> } />
+          <Route path='/course/:courseId' render={ (props) => loggedIn ? <AssignmentView {...props } /> : <Redirect to='/login' /> } />
+          <Route path='/settings' render={ (props) => loggedIn ? <SettingsView {...props } /> : <Redirect to='/login' /> } />
+          <Route path='/register' component={ RegisterView } />
+          <Route path='/verify' component={ VerifyView } />
+          <Route path='/login' component={ LoginView }/>
+          <Redirect to='/login' />
+        </Switch>
       </div>
     )
   }
-
 };
 
 function mapStateToProps(state) {

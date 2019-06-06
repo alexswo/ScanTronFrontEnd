@@ -67,6 +67,7 @@ function register(user) {
     .then((response) => {
       console.log('sending VERIFY_REQUEST messages');
       dispatch({ type: 'VERIFY_REQUEST', email: user.email, firstName: user.firstName });
+      history.push('/verify');
     })
     .catch((error) => {
       console.log(error);
@@ -193,6 +194,51 @@ function createCourse(user, course) {
   }
 }
 
+function createExam(user, courseId, exam) {
+  return dispatch => {
+    // Set up POST request
+    const url = `${apiUrl}/exam/${user.email}/${courseId}`;
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(exam),
+    };
+
+    // POST using fetch API
+    fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      console.log('made new exam, getting updated list');
+      dispatch(getAllExams(user, courseId));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+}
+
+function getAllExams(user, courseId) {
+  return dispatch => {
+    // Set up GET request
+    const url = `${apiUrl}/exam/${user.email}/${courseId}/all`;
+    const requestOptions = {
+      method: 'GET',
+      credentials: 'include',
+    };
+
+    // GET using fetch API
+    fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+}
+
 export default {
     logout,
     login,
@@ -202,4 +248,6 @@ export default {
     updateUser,
     getAllCourses,
     createCourse,
+    createExam,
+    getAllExams,
 };

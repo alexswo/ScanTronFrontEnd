@@ -12,18 +12,21 @@ export default class AssignmentCard extends Component {
 
     new Chart(myChartRef, { line, data, labels, datasets });
   }
+  
   render() {
-    return (<Card style={{
-        'width' : '100%'
-      }}>
-      <CardHeader className='border-bottom'>
-        <Link to='/assignment' className='disabled-link'>{this.props.title}</Link>
-      </CardHeader>
-      <CardBody className='pt-0'>
-        <canvas ref={this.chartRef} style={{
-            maxWidth: '100% !important'
-          }}/>
-      </CardBody>
-    </Card>);
+    return (
+      <Card style={{
+          'width' : '100%'
+        }}>
+        <CardHeader className='border-bottom'>
+          <Link to='/assignment' className='disabled-link'>{this.props.title}</Link>
+        </CardHeader>
+        <CardBody className='pt-0'>
+          <canvas ref={this.chartRef} style={{
+              maxWidth: '100% !important'
+            }}/>
+        </CardBody>
+      </Card>
+    );
   }
 }

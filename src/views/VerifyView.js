@@ -1,14 +1,14 @@
 import React from 'react';
 import { Container, Row, Col } from 'shards-react';
-import LoginCard from '../components/cards/LoginCard';
+import VerifyCard from '../components/cards/VerifyCard';
 
-const LoginView = () => {
+const VerifyView = () => {
   return (
     <Container fluid>
       <Row>
         <Col />
         <Col className='main-content my-4' tag='main'>
-          <LoginCard />
+          <VerifyCard />
         </Col>
         <Col />
       </Row>
@@ -16,4 +16,4 @@ const LoginView = () => {
   )
 }
 
-export default LoginView;
+export default VerifyView;

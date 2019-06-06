@@ -40,8 +40,8 @@ class CoursesView extends Component {
               <Row>
                 <Col lg={{ size: 10 }} md={{ size: 9 }}>
                   {all_courses && all_courses.map(course => (
-                    <Row noGutters style={{ 'width': '100%' }} className='py-4' key={course.courseid}>
-                      <OverviewCard name={course.name} description={course.description} />
+                    <Row noGutters style={{ 'width': '100%' }} key={course.courseid}>
+                      <OverviewCard name={course.name} description={course.description} id={course.courseid}/>
                     </Row>
                   ))}
                 </Col>
