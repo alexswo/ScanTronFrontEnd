@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SideBar from '../components/layout/SideBar';
-import {Container, Row, Col} from 'shards-react';
+import { Container, Row, Col } from 'shards-react';
 import AssignmentCard from '../components/cards/AssignmentCard';
 import CreateExamCard from '../components/cards/CreateExamCard';
 import OverviewCard from '../components/cards/OverviewCard';

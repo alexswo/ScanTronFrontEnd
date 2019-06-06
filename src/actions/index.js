@@ -222,6 +222,28 @@ function createCourse(user, course) {
   }
 }
 
+function deleteCourse(user, courseId) {
+  return dispatch => {
+    // Set up GET request
+    const url = `${apiUrl}/course/${user.email}/${courseId}`;
+    const requestOptions = {
+      method: 'DELETE',
+      credentials: 'include',
+    };
+
+    // GET using fetch API
+    fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      dispatch(clearCourse());
+      history.push('/courses');
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+}
+
 function createExam(user, courseId, exam) {
   return dispatch => {
     // Set up POST request
@@ -281,6 +303,7 @@ export default {
     clearCourse,
     getAllCourses,
     createCourse,
+    deleteCourse,
     createExam,
     getAllExams,
 };

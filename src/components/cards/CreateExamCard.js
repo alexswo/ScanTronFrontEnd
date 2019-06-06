@@ -9,6 +9,9 @@ import {
   FormInput,
   InputGroup,
   InputGroupAddon,
+  Modal,
+  ModalBody,
+  ModalHeader
 } from 'shards-react';
 import actions from '../../actions';
 
@@ -20,19 +23,26 @@ class CreateExamCard extends Component {
       name: '',
       answers: [''],
       collapse: false,
+      open: false,
       submitted: false,
     };
 
-    this.toggle = this.toggle.bind(this);
+    this.toggleCollapse = this.toggleCollapse.bind(this);
+    this.toggleModal = this.toggleModal.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleAnswerChange = this.handleAnswerChange.bind(this);
     this.handleAddAnswer = this.handleAddAnswer.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
-  toggle() {
+  toggleCollapse() {
    this.setState({ collapse: !this.state.collapse });
- }
+  }
+
+  toggleModal() {
+   this.setState({ open: !this.state.open });
+  }
 
   handleChange(event) {
     const { name, value } = event.target;
@@ -84,11 +94,17 @@ class CreateExamCard extends Component {
     }
   }
 
+  handleDelete() {
+    const { dispatch, id, user } = this.props;
+    dispatch(actions.deleteCourse(user, id));
+  }
+
   render() {
-    const { name, answers, submitted } = this.state;
+    const { name, answers, submitted, open } = this.state;
     return(
       <div className='py-4'>
-        <Button onClick={ this.toggle }>Create Exam</Button>
+        <Button className='mr-2' onClick={ this.toggleCollapse }>Create Exam</Button>
+        <Button outline theme='danger' className='mr-2' onClick={ this.toggleModal }>Delete Course</Button>
         <Collapse open={ this.state.collapse }>
           <div className="p-3 mt-3 border rounded">
             <Form onSubmit={ this.handleSubmit }>
@@ -136,6 +152,18 @@ class CreateExamCard extends Component {
             </Form>
           </div>
         </Collapse>
+        <Modal open={open} toggle={ this.toggleModal }>
+          <ModalHeader>Are you sure?</ModalHeader>
+          <ModalBody>
+            <Row>
+              Delete this course permanently?
+            </Row>
+            <Row className='mt-2'>
+              <Button className='mr-2' outline theme='danger' onClick={ this.handleDelete }>Yes</Button>
+              <Button className='mr-2' outline theme='secondary' onClick={ this.toggleModal }>No</Button>
+            </Row>
+          </ModalBody>
+        </Modal>
       </div>
     )
   }
