@@ -149,6 +149,33 @@ function updateUser(user) {
   }
 }
 
+function getCourse(user, courseId) {
+  return dispatch => {
+    // Set up GET request
+    const url = `${apiUrl}/course/${user.email}/${courseId}`;
+    const requestOptions = {
+      method: 'GET',
+      credentials: 'include',
+    };
+
+    // GET using fetch API
+    fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      dispatch({ type: 'COURSE', course: response });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+}
+
+function clearCourse() {
+  return dispatch => {
+    dispatch({ type: 'CLEAR_COURSE' });
+  }
+}
+
 function getAllCourses(user) {
   return dispatch => {
     // Set up GET request
@@ -231,7 +258,10 @@ function getAllExams(user, courseId) {
     fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      console.log(response);
+      const exams = response;
+      if (Object.keys(exams).length > 0) {
+        dispatch({ type: 'COURSE_EXAMS', exams: response });
+      }
     })
     .catch((error) => {
       console.log(error);
@@ -246,6 +276,8 @@ export default {
     verify,
     getUser,
     updateUser,
+    getCourse,
+    clearCourse,
     getAllCourses,
     createCourse,
     createExam,
