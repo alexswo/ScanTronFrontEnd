@@ -8,7 +8,7 @@ import {
 } from 'shards-react';
 
 const OverviewCard = ({ name, description, id }) => (
-  <Card className='mb-4' style={{ 'width': '100%' }}>
+  <Card className='mb-2 mt-2' style={{ 'width': '100%' }}>
     {name &&
       <CardHeader className='border-bottom'>
         <Link to={'/course/' + id}><h6 className='m-0'>{name}</h6></Link>

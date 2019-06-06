@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SideBarItem from './SideBarItem.js';
-import { Nav, Col, NavbarBrand, Navbar } from 'shards-react';
+import {
+  Nav,
+  Col,
+  NavbarBrand,
+  Navbar,
+} from 'shards-react';
 import actions from '../../actions';
 
 class SideBar extends Component {
@@ -32,8 +37,7 @@ class SideBar extends Component {
         </Navbar>
         <Nav className='nav--no-borders flex-column'>
           <SideBarItem to='/courses' name='Courses' />
-          {/* <SideBarItem to='/assignment' name='Assignments' /> */}
-          <SideBarItem to='/settings' name='Settings' />
+          <SideBarItem to='/user' name='User Profile' />
           <SideBarItem to='/login' name='Logout' handleClick={ () => dispatch(actions.logout()) }/>
         </Nav>
       </Col>

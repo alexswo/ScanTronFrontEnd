@@ -5,7 +5,6 @@ function logout() {
   return dispatch => {
     localStorage.removeItem('user');
     dispatch({ type: 'LOGOUT' });
-    // window.location.reload();
   }
 }
 

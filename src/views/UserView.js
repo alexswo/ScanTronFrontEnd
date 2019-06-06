@@ -1,9 +1,9 @@
 import React from 'react';
 import SideBar from '../components/layout/SideBar';
 import { Container, Row, Col } from 'shards-react';
-import SettingsCard from '../components/cards/SettingsCard'
+import UserCard from '../components/cards/UserCard'
 
-const AssignmentView = () => (
+const UserView = () => (
   <Container fluid>
     <Row>
       <SideBar />
@@ -18,11 +18,11 @@ const AssignmentView = () => (
           <Row className='page-header py-4'>
             <Col xs='12' sm='4' className='text-center text-md-left mb-sm-0'>
               <span className='text-uppercase page-subtitle'>Gradus</span>
-              <h3 className='page-title'>Settings</h3>
+              <h3 className='page-title'>User Profile</h3>
             </Col>
           </Row>
           <Row noGutters style={ { 'width': '100%' } } className='py-4'>
-            <SettingsCard />
+            <UserCard />
           </Row>
         </Container>
       </Col>
@@ -30,4 +30,4 @@ const AssignmentView = () => (
   </Container>
 )
 
-export default AssignmentView;
+export default UserView;

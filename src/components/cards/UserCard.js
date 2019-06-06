@@ -14,7 +14,7 @@ import {
 } from 'shards-react';
 import actions from '../../actions';
 
-class SettingsCard extends Component {
+class UserCard extends Component {
   constructor(props) {
     super(props);
 
@@ -66,7 +66,7 @@ class SettingsCard extends Component {
     return (
       <Card className='mb-4' style={ { 'width': '100%' } }>
         <CardHeader className='border-bottom'>
-          <h6 className='m-0'>Settings</h6>
+          <h6 className='m-0'>User Profile</h6>
         </CardHeader>
         <ListGroup flush>
           <ListGroupItem className='p-3'>
@@ -130,4 +130,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(SettingsCard);
+export default connect(mapStateToProps)(UserCard);
