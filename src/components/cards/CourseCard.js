@@ -7,7 +7,7 @@ import {
   ListGroupItem,
 } from 'shards-react';
 
-const OverviewCard = ({ name, description, id }) => (
+const CourseCard = ({ name, description, id }) => (
   <Card className='mb-2 mt-2' style={{ 'width': '100%' }}>
     {name &&
       <CardHeader className='border-bottom'>
@@ -27,4 +27,4 @@ const OverviewCard = ({ name, description, id }) => (
   </Card>
 );
 
-export default OverviewCard;
+export default CourseCard;

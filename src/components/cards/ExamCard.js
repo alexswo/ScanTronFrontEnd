@@ -94,18 +94,17 @@ class ExamCard extends Component {
   }
 
   render() {
-    return (<Card style={{
-        'width' : '100%'
-      }}>
-      <CardHeader className='border-bottom'>
-        <Link to={'/exam/' + this.props.id}><h6 className='m-0'>{this.props.title}</h6></Link>
-      </CardHeader>
-      <CardBody className='pt-0'>
-        <canvas ref={this.chartRef} style={{
-            maxWidth: '100% !important'
-          }}/>
-      </CardBody>
-    </Card>);
+    return (
+      <Card style={{ 'width' : '100%' }}>
+        <CardHeader className='border-bottom'>
+          <Link to={'/exam/' + this.props.id}><h6 className='m-0'>{this.props.title}</h6></Link>
+        </CardHeader>
+        <CardBody className='pt-0'>
+          <canvas ref={this.chartRef} style={{
+              maxWidth: '100% !important'
+            }}/>
+        </CardBody>
+      </Card>);
   }
 }
 

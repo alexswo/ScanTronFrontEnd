@@ -18,7 +18,7 @@ class GradesCard extends Component {
   render() {
     const { grades } = this.props;
     return (
-      <Card style={{ 'width' : '100%' }}>
+      <Card style={{ 'width' : '100%' }} className='mb-4'>
         <CardHeader className='border-bottom'>
           <h6 className='m-0'>Grades</h6>
         </CardHeader>

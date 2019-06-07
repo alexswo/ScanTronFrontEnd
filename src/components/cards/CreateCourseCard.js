@@ -64,7 +64,7 @@ class CreateCourseCard extends Component {
   render() {
     const { course } = this.state;
     return(
-      <div className='py-4'>
+      <div className='py-4 ml-auto'>
         <Button onClick={ this.toggle }>Create Course</Button>
         <Collapse open={ this.state.collapse }>
           <div className="p-3 mt-3 border rounded">

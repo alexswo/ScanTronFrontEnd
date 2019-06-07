@@ -37,6 +37,9 @@ export function exams(state = {}, action) {
           grades: state[action.examId].grades.filter(grade => grade.gradeid !== action.gradeId),
         }
       }
+    case 'DELETE_EXAM':
+      const { [action.examId]: omit, ...rest } = state;
+      return rest;
     default:
       return state;
   }
