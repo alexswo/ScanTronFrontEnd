@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {
   Card,
   CardHeader,
@@ -10,7 +10,7 @@ import {
   Form,
   FormInput,
   Button,
-  InputGroupText,
+  InputGroupText
 } from 'shards-react';
 import actions from '../../actions';
 
@@ -22,10 +22,10 @@ class UserCard extends Component {
       user: {
         firstName: '',
         lastName: '',
-        school: '',
-        email: '',
+        school: ''
       },
-      changed: false,
+      submitted: false,
+      changed: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -33,100 +33,99 @@ class UserCard extends Component {
   }
 
   handleChange(event) {
-    const { name, value } = event.target;
-    const { user } = this.state;
+    const {name, value} = event.target;
+    const {user} = this.state;
     this.setState({
       user: {
         ...user,
         [name]: value
       },
       changed: true,
+      submitted: false,
     });
   }
 
   handleSubmit(event) {
     event.preventDefault();
 
-    this.setState({ submitted: true });
-    const { user, changed } = this.state;
-    const { dispatch } = this.props;
+    this.setState({submitted: true});
+    const {user, changed} = this.state;
+    const {dispatch, email, school, firstName, lastName} = this.props;
     if (changed) {
-      dispatch(actions.updateUser(user));
+      dispatch(actions.updateUser({
+        firstName: user.firstName || firstName,
+        lastName: user.lastName || lastName,
+        school: user.school || school,
+      }, email));
+      this.setState({
+        user: {
+          firstName: '',
+          lastName: '',
+          school: ''
+        },
+        submitted: false,
+        changed: false
+      })
     }
   }
 
   componentDidMount() {
-    const { dispatch, user } = this.props;
+    const {dispatch, user} = this.props;
     dispatch(actions.getUser(user));
   }
 
   render() {
-    const { user } = this.state;
-    const { email, firstName, lastName, school } = this.props;
-    return (
-      <Card className='mb-4' style={ { 'width': '100%' } }>
-        <CardHeader className='border-bottom'>
-          <h6 className='m-0'>User Profile</h6>
-        </CardHeader>
-        <ListGroup flush>
-          <ListGroupItem className='p-3'>
-            <Row>
-              <Col>
-                <Form onSubmit={ this.handleSubmit }>
-                  <Row form>
-                    {/* First Name */}
-                    <Col md='6' className='form-group'>
-                      <label htmlFor='firstName'>First Name</label>
-                      <FormInput
-                        name='firstName'
-                        value={ user.firstName }
-                        onChange={ this.handleChange }
-                        placeholder={ firstName }
-                      />
-                    </Col>
-                    {/* Last Name */}
-                    <Col md='6' className='form-group'>
-                      <label htmlFor='lastName'>Last Name</label>
-                      <FormInput
-                        name='lastName'
-                        value={ user.lastName }
-                        onChange={ this.handleChange }
-                        placeholder={ lastName }
-                      />
-                    </Col>
-                  </Row>
-                  <Row form>
-                    {/* School */}
-                    <Col md='6' className='form-group'>
-                      <label htmlFor='school'>School</label>
-                      <FormInput
-                        name='school'
-                        value={ user.school }
-                        onChange={ this.handleChange }
-                        placeholder={ school }
-                      />
-                    </Col>
-                    {/* Email */}
-                    <Col md='6' className='form-group'>
-                      <label>Email</label>
-                      <InputGroupText>{ email }</InputGroupText>
-                    </Col>
-                  </Row>
-                  <Button theme='accent'>Update Account</Button>
-                </Form>
-              </Col>
-            </Row>
-          </ListGroupItem>
-        </ListGroup>
-      </Card>
-    )
+    const {user, submitted} = this.state;
+    const {email, firstName, lastName, school} = this.props;
+    return (<Card className='mb-4' style={{
+        'width' : '100%'
+      }}>
+      <CardHeader className='border-bottom'>
+        <h6 className='m-0'>User Profile</h6>
+      </CardHeader>
+      <ListGroup flush="flush">
+        <ListGroupItem className='p-3'>
+          <Row>
+            <Col>
+              <Form onSubmit={this.handleSubmit}>
+                <Row form="form">
+                  {/* First Name */}
+                  <Col md='6' className='form-group'>
+                    <label htmlFor='firstName'>First Name</label>
+                    <FormInput name='firstName' invalid={submitted && !user.firstName} value={user.firstName} onChange={this.handleChange} placeholder={firstName}/>
+                  </Col>
+                  {/* Last Name */}
+                  <Col md='6' className='form-group'>
+                    <label htmlFor='lastName'>Last Name</label>
+                    <FormInput name='lastName' invalid={submitted && !user.lastName} value={user.lastName} onChange={this.handleChange} placeholder={lastName}/>
+                  </Col>
+                </Row>
+                <Row form="form">
+                  {/* School */}
+                  <Col md='6' className='form-group'>
+                    <label htmlFor='school'>School</label>
+                    <FormInput name='school' invalid={submitted && !user.school} value={user.school} onChange={this.handleChange} placeholder={school}/>
+                  </Col>
+                  {/* Email */}
+                  <Col md='6' className='form-group'>
+                    <label>Email</label>
+                    <InputGroupText>{email}</InputGroupText>
+                  </Col>
+                </Row>
+                <Button theme='accent'>Update Account</Button>
+              </Form>
+            </Col>
+          </Row>
+        </ListGroupItem>
+      </ListGroup>
+    </Card>)
   }
 }
 
 function mapStateToProps(state) {
   return {
     ...state.user,
-    user: state.authentication.user,
+    user: state.authentication.user
   };
 }
 
