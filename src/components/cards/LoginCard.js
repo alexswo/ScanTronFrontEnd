@@ -27,7 +27,8 @@ class LoginCard extends Component {
     const { name, value } = e.target;
     this.setState({
       ...this.state,
-      [name]: value
+      [name]: value,
+      submitted: false,
     });
   }
 

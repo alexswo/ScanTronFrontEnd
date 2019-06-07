@@ -128,10 +128,10 @@ function getUser(user) {
   }
 }
 
-function updateUser(user) {
+function updateUser(user, email) {
   return dispatch => {
     // Set up PUT request
-    const url = `${apiUrl}/user/${user.email}`;
+    const url = `${apiUrl}/user/${email}`;
     const requestOptions = {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -144,7 +144,7 @@ function updateUser(user) {
     .then(handleResponse)
     .then((response) => {
       console.log(`updated user, GET updated data`);
-      dispatch(getUser(user));
+      dispatch(getUser({ ...user, email }));
     })
     .catch((error) =>{
       console.log(error);

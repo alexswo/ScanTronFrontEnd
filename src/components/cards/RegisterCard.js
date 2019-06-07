@@ -42,7 +42,8 @@ class RegisterCard extends Component {
       user: {
         ...user,
         [name]: value
-      }
+      },
+      submitted: false,
     });
   }
 
