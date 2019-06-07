@@ -130,7 +130,7 @@ class CreateExamCard extends Component {
                   { answers.map((answer, i) => (
                     <InputGroup key={ `Answer ${i}` }>
                       <FormInput
-                        invalid={submitted &&  !answer}
+                        invalid={submitted && !answer}
                         type='text'
                         placeholder={`Answer for Question ${i + 1}`}
                         value={ answer }

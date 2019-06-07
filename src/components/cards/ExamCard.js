@@ -6,16 +6,16 @@ import {Card, CardHeader, CardBody} from 'shards-react';
 import actions from '../../actions';
 
 const labels = [
-  '0-10',
-  '11-20',
-  '21-30',
-  '31-40',
-  '41-50',
-  '51-60',
-  '61-70',
-  '71-80',
-  '81-90',
-  '91-100',
+  '0-9',
+  '10-19',
+  '20-29',
+  '30-39',
+  '40-49',
+  '50-59',
+  '60-69',
+  '70-79',
+  '80-89',
+  '90-100',
 ];
 
 class ExamCard extends Component {
@@ -26,9 +26,18 @@ class ExamCard extends Component {
   }
 
   chartRef = React.createRef();
+  chart;
 
   generateData(scores) {
-    return new Array(11).fill(0).map((val, i) => scores.filter(score => Math.floor(score/10) === (i+1)).length);
+    const bins = new Array(10).fill(0);
+    scores.forEach(score => {
+      if (score !== '100') {
+        bins[Math.floor(score/10)] += 1;
+      } else {
+        bins[9] += 1;
+      }
+    });
+    return bins;
   }
 
   componentDidMount() {
@@ -41,7 +50,12 @@ class ExamCard extends Component {
     const { scores } = this.props;
     const data = this.generateData(scores);
     const myChartRef = this.chartRef.current.getContext('2d');
-    new Chart(myChartRef, {
+
+    if (this.chart) {
+      this.chart.destroy();
+    }
+
+    this.chart = new Chart(myChartRef, {
       type: 'horizontalBar',
       data: {
         labels,
@@ -70,6 +84,10 @@ class ExamCard extends Component {
               }
             }
           ]
+        },
+        animation: {
+          duration: 2000,
+          easing: 'easeInOutQuart'
         }
       }
     });
