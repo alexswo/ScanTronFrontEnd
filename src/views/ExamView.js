@@ -15,6 +15,7 @@ import {
 import ExamCard from '../components/cards/ExamCard';
 import ExamInfoCard from '../components/cards/ExamInfoCard';
 import GradesCard from '../components/cards/GradesCard';
+import AlertCard from '../components/cards/AlertCard';
 import actions from '../actions';
 
 class ExamView extends Component {
@@ -137,6 +138,7 @@ class ExamView extends Component {
               <GradesCard id={examId}/>
               <ExamInfoCard answers={answers} />
             </Container>
+            <AlertCard />
           </Col>
         </Row>
       </Container>

@@ -19,6 +19,7 @@ import {
 } from 'shards-react';
 import ExamCard from '../components/cards/ExamCard';
 import CreateExamCard from '../components/cards/CreateExamCard';
+import AlertCard from '../components/cards/AlertCard';
 import actions from '../actions';
 
 class CourseView extends Component {
@@ -175,6 +176,7 @@ class CourseView extends Component {
                 </Row>
               ))}
             </Container>
+            <AlertCard />
           </Col>
         </Row>
       </Container>

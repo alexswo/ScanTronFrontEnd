@@ -217,9 +217,11 @@ function createCourse(user, course) {
     .then((response) => {
       console.log('made new course, getting updated list');
       dispatch(getAllCourses(user));
+      dispatch({ type: 'SUCCESS', message: `Successfully created new course: ${course.name}!` });
     })
     .catch((error) => {
       console.log(error);
+      dispatch({ type: 'FAIL', message: `Failed to create new course: ${course.name} :(` });
     });
   }
 }
@@ -240,9 +242,11 @@ function updateCourse(user, courseId, course) {
     .then(handleResponse)
     .then((response) => {
       dispatch(getCourse(user, courseId));
+      dispatch({ type: 'SUCCESS', message: `Successfully updated course!` });
     })
     .catch((error) => {
       console.log(error);
+      dispatch({ type: 'FAIL', message: `Could not update course :(` });
     })
   }
 }
@@ -262,9 +266,11 @@ function deleteCourse(user, courseId) {
     .then((response) => {
       dispatch(clearCourse());
       history.push('/courses');
+      dispatch({ type: 'SUCCESS', message: `Successfully deleted course!` });
     })
     .catch((error) => {
       console.log(error);
+      dispatch({ type: 'FAIL', message: `Could not delete course :(` });
     })
   }
 }
@@ -286,9 +292,11 @@ function createExam(user, courseId, exam) {
     .then((response) => {
       console.log('made new exam, getting updated list');
       dispatch(getAllExams(user, courseId));
+      dispatch({ type: 'SUCCESS', message: `Successfully created exam: ${exam.name}!` });
     })
     .catch((error) => {
       console.log(error);
+      dispatch({ type: 'FAIL', message: `Could not create exam :(` });
     });
   }
 }
@@ -330,9 +338,11 @@ function updateExam(user, examId, name) {
     .then(handleResponse)
     .then((response) => {
       dispatch(getExam(user, examId));
+      dispatch({ type: 'SUCCESS', message: `Successfully updated exam!` });
     })
     .catch((error) => {
       console.log(error);
+      dispatch({ type: 'FAIL', message: `Could not update exam :(` });
     })
   }
 }
@@ -352,9 +362,11 @@ function deleteExam(user, examId, courseId) {
     .then((response) => {
       dispatch({ type: 'DELETE_EXAM', examId });
       history.push(`/course/${courseId}`);
+      dispatch({ type: 'SUCCESS', message: `Successfully deleted exam!` });
     })
     .catch((error) => {
       console.log(error);
+      dispatch({ type: 'FAIL', message: `Could not delete exam :(` });
     })
   }
 }
@@ -442,9 +454,11 @@ function deleteGrade(user, gradeId, examId) {
     .then(handleResponse)
     .then((response) => {
       dispatch({ type: 'CLEAR_GRADE', gradeId, examId });
+      dispatch({ type: 'SUCCESS', message: `Successfully deleted grade!` });
     })
     .catch((error) => {
       console.log(error);
+      dispatch({ type: 'FAIL', message: `Failed to delete grade :(` });
     })
   }
 }
@@ -466,9 +480,11 @@ function updateGrade(user, score, gradeId, examId) {
     .then((response) => {
       console.log(`updated grade, GET updated data`);
       dispatch(getAllGrades(user, examId));
+      dispatch({ type: 'SUCCESS', message: `Successfully updated grade!` });
     })
     .catch((error) =>{
       console.log(error);
+      dispatch({ type: 'FAIL', message: `Failed to update grade :(` });
     })
   }
 }
