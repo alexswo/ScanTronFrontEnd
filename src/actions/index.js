@@ -224,6 +224,29 @@ function createCourse(user, course) {
   }
 }
 
+function updateCourse(user, courseId, course) {
+  return dispatch => {
+    // Set up DELETE request
+    const url = `${apiUrl}/course/${user.email}/${courseId}`;
+    const requestOptions = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(course),
+    };
+
+    // DELETE using fetch API
+    fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      dispatch(getCourse(user, courseId));
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+}
+
 function deleteCourse(user, courseId) {
   return dispatch => {
     // Set up DELETE request
@@ -288,6 +311,28 @@ function getExam(user, examId) {
     .catch((error) => {
       console.log(error);
     });
+  }
+}
+
+function deleteExam(user, examId, courseId) {
+  return dispatch => {
+    // Set up DELETE request
+    const url = `${apiUrl}/exam/${user.email}/${examId}`;
+    const requestOptions = {
+      method: 'DELETE',
+      credentials: 'include',
+    };
+
+    // DELETE using fetch API
+    fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      dispatch({ type: 'DELETE_EXAM', examId });
+      history.push(`/course/${courseId}`);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
 }
 
@@ -416,9 +461,11 @@ export default {
     clearCourse,
     getAllCourses,
     createCourse,
+    updateCourse,
     deleteCourse,
     createExam,
     getExam,
+    deleteExam,
     getAllExams,
     getAllGrades,
     getGrade,
