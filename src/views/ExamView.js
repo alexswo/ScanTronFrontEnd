@@ -3,15 +3,13 @@ import { connect } from 'react-redux';
 import SideBar from '../components/layout/SideBar';
 import { Container, Row, Col } from 'shards-react';
 import ExamCard from '../components/cards/ExamCard';
-import CreateExamCard from '../components/cards/CreateExamCard';
-import OverviewCard from '../components/cards/OverviewCard';
+import GradesCard from '../components/cards/GradesCard';
 import actions from '../actions';
 
-class CourseView extends Component {
+class ExamView extends Component {
   componentDidMount() {
-    const { dispatch, user, courseId } = this.props;
-    dispatch(actions.getAllExams(user, courseId));
-    dispatch(actions.getCourse(user, courseId));
+    const { dispatch, user, examId } = this.props;
+    dispatch(actions.getExam(user, examId));
   }
 
   componentWillUnmount() {
@@ -20,7 +18,7 @@ class CourseView extends Component {
   }
 
   render() {
-    const { courseId, name, description, exams } = this.props;
+    const { examId, name } = this.props;
     return (
       <Container fluid>
         <Row>
@@ -35,17 +33,14 @@ class CourseView extends Component {
             <Container fluid className='main-content-container px-4'>
               <Row className='page-header py-4'>
                 <Col xs='12' sm='4' className='text-center text-md-left mb-sm-0'>
-                  <span className='text-uppercase page-subtitle'>Course Overview</span>
+                  <span className='text-uppercase page-subtitle'>Exam Overview</span>
                   <h3 className='page-title'>{name}</h3>
                 </Col>
               </Row>
-              <OverviewCard description={description} id={courseId}/>
-              <CreateExamCard id={ courseId }/>
-              {exams && exams.map(exam => (
-                <Row noGutters style={{ 'width': '100%' }} key={exam.examid} className='mb-4'>
-                  <ExamCard title={exam.name} id={exam.examid} />
-                </Row>
-              ))}
+              <Row noGutters style={{ 'width': '100%' }} className='mb-4'>
+                <ExamCard title={name} id={examId} />
+              </Row>
+              <GradesCard id={examId} />
             </Container>
           </Col>
         </Row>
@@ -56,10 +51,10 @@ class CourseView extends Component {
 
 function mapStateToProps(state, { match }) {
   return {
-    ...state.courses.course,
+    ...state.exams[match.params.examId],
     user: state.authentication.user,
-    courseId: match.params.courseId,
+    examId: match.params.examId,
   }
 }
 
-export default connect(mapStateToProps)(CourseView);
+export default connect(mapStateToProps)(ExamView);

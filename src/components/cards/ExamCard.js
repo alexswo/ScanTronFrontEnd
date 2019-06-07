@@ -38,12 +38,7 @@ class ExamCard extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    let scores = [];
-    if (!this.props.scores.length) {
-      scores = [10, 20, 30, 40, 50, 60, 70, 80, 80, 65, 64, 70, 34, 91, 92, 100];
-    } else {
-      scores = this.props.scores;
-    }
+    const { scores } = this.props;
     const data = this.generateData(scores);
     const myChartRef = this.chartRef.current.getContext('2d');
     new Chart(myChartRef, {
