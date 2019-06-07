@@ -56,7 +56,7 @@ class AlertCard extends Component {
     const { visible } = this.state;
     console.log(visible);
     return (
-      <Alert className="mt-4" open={ visible } theme={ status }>
+      <Alert className="mb-4" style={{ position: 'fixed', bottom: 0 }} open={ visible } theme={ status }>
         { message }
       </Alert>
     );
