@@ -2,10 +2,12 @@ import history from '../history';
 const apiUrl = 'http://scantronbackend-env.mzszeithxu.us-west-2.elasticbeanstalk.com';
 
 function logout() {
-  return dispatch => {
-    localStorage.removeItem('user');
-    dispatch({ type: 'LOGOUT' });
-  }
+  // return dispatch => {
+  //   localStorage.removeItem('user');
+  //   dispatch({ type: 'LOGOUT' });
+  // }
+  localStorage.removeItem('user');
+  window.location.reload();
 }
 
 function handleResponse(response) {
@@ -224,14 +226,14 @@ function createCourse(user, course) {
 
 function deleteCourse(user, courseId) {
   return dispatch => {
-    // Set up GET request
+    // Set up DELETE request
     const url = `${apiUrl}/course/${user.email}/${courseId}`;
     const requestOptions = {
       method: 'DELETE',
       credentials: 'include',
     };
 
-    // GET using fetch API
+    // DELETE using fetch API
     fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
@@ -268,6 +270,27 @@ function createExam(user, courseId, exam) {
   }
 }
 
+function getExam(user, examId) {
+  return dispatch => {
+    // Set up GET request
+    const url = `${apiUrl}/exam/${user.email}/${examId}`;
+    const requestOptions = {
+      method: 'GET',
+      credentials: 'include',
+    };
+
+    // GET using fetch API
+    fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      dispatch({ type: 'EXAM', examId, exam: response });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+}
+
 function getAllExams(user, courseId) {
   return dispatch => {
     // Set up GET request
@@ -292,6 +315,30 @@ function getAllExams(user, courseId) {
   }
 }
 
+function getAllGrades(user, examId) {
+  return dispatch => {
+    // Set up GET request
+    const url = `${apiUrl}/grade/${user.email}/${examId}/all`;
+    const requestOptions = {
+      method: 'GET',
+      credentials: 'include',
+    };
+
+    // GET using fetch API
+    fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      const exams = response;
+      if (Object.keys(exams).length > 0) {
+        dispatch({ type: 'EXAM_GRADES', examId, grades: response });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+}
+
 export default {
     logout,
     login,
@@ -305,5 +352,7 @@ export default {
     createCourse,
     deleteCourse,
     createExam,
+    getExam,
     getAllExams,
+    getAllGrades,
 };

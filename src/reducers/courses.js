@@ -1,6 +1,6 @@
 const initialState = {
   all_courses: [],
-  courses: {
+  course: {
     exams: [],
   }
 }

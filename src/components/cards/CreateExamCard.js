@@ -14,6 +14,7 @@ import {
   ModalHeader
 } from 'shards-react';
 import actions from '../../actions';
+import examSheet from '../../mc_sheet.pdf';
 
 class CreateExamCard extends Component {
   constructor(props) {
@@ -63,6 +64,7 @@ class CreateExamCard extends Component {
         name: '',
         answers: [''],
         collapse: false,
+        submitted: false,
       })
     }
   }
@@ -145,6 +147,14 @@ class CreateExamCard extends Component {
                     className='small mt-2'
                   >
                     Add Answer
+                  </Button>
+                  <Button
+                    href={examSheet}
+                    theme='light'
+                    className='small ml-2 mt-2'
+                    download='exam_sheet.pdf'
+                  >
+                    Download Exam
                   </Button>
                 </Col>
               </Row>

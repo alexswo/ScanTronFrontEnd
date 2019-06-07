@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SideBar from '../components/layout/SideBar';
 import { Container, Row, Col } from 'shards-react';
-import AssignmentCard from '../components/cards/AssignmentCard';
+import ExamCard from '../components/cards/ExamCard';
 import CreateExamCard from '../components/cards/CreateExamCard';
 import OverviewCard from '../components/cards/OverviewCard';
 import actions from '../actions';
 
-class AssignmentView extends Component {
+class CourseView extends Component {
   componentDidMount() {
     const { dispatch, user, courseId } = this.props;
     dispatch(actions.getAllExams(user, courseId));
@@ -43,7 +43,7 @@ class AssignmentView extends Component {
               <CreateExamCard id={ courseId }/>
               {exams && exams.map(exam => (
                 <Row noGutters style={{ 'width': '100%' }} key={exam.examid} className='mb-4'>
-                  <AssignmentCard title={exam.name} />
+                  <ExamCard title={exam.name} id={exam.examid} />
                 </Row>
               ))}
             </Container>
@@ -62,4 +62,4 @@ function mapStateToProps(state, { match }) {
   }
 }
 
-export default connect(mapStateToProps)(AssignmentView);
+export default connect(mapStateToProps)(CourseView);

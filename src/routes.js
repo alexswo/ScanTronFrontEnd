@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import CoursesView from './views/CoursesView.js';
-import AssignmentView from './views/AssignmentView.js';
+import CourseView from './views/CourseView.js';
 import UserView from './views/UserView.js';
 import RegisterView from './views/RegisterView.js';
 import VerifyView from './views/VerifyView.js';
@@ -14,7 +14,7 @@ class Routes extends Component {
         <Switch>
           <Route exact path='/' render={ (props) => localStorage.getItem('user') ? <CoursesView  {...props } /> : <Redirect to='/login' /> } />
           <Route path='/courses' render={ (props) => localStorage.getItem('user') ? <CoursesView {...props } /> : <Redirect to='/login' /> } />
-          <Route path='/course/:courseId' render={ (props) => localStorage.getItem('user') ? <AssignmentView {...props } /> : <Redirect to='/login' /> } />
+          <Route path='/course/:courseId' render={ (props) => localStorage.getItem('user') ? <CourseView {...props } /> : <Redirect to='/login' /> } />
           <Route path='/user' render={ (props) => localStorage.getItem('user') ? <UserView {...props } /> : <Redirect to='/login' /> } />
           <Route path='/register' component={ RegisterView } />
           <Route path='/verify' component={ VerifyView } />
