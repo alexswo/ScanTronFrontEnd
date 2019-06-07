@@ -14,12 +14,12 @@ import actions from '../../actions';
 import examSheet from '../../mc_sheet.pdf';
 
 const options = [
-{ value: '', label: 'Add Answer' },
-{ value: 'A', label: 'A' },
-{ value: 'B', label: 'B' },
-{ value: 'C', label: 'C' },
-{ value: 'D', label: 'D' },
-{ value: 'E', label: 'E' },
+  { value: '', label: 'Add Answer' },
+  { value: 'A', label: 'A' },
+  { value: 'B', label: 'B' },
+  { value: 'C', label: 'C' },
+  { value: 'D', label: 'D' },
+  { value: 'E', label: 'E' },
 ];
 
 class CreateExamCard extends Component {
@@ -37,7 +37,6 @@ class CreateExamCard extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleAnswerChange = this.handleAnswerChange.bind(this);
-    this.handleAddAnswer = this.handleAddAnswer.bind(this);
   }
 
   toggleCollapse() {
@@ -67,21 +66,6 @@ class CreateExamCard extends Component {
       })
     }
   }
-
-  handleAddAnswer() {
-    const { answers } = this.state;
-    const newAnswers = answers.concat(['']);
-    this.setState({
-      answers: newAnswers,
-    });
-  };
-
-  handleRemoveAnswer(i) {
-    const { answers } = this.state;
-    this.setState({
-      answers: answers.filter((s, si) => i !== si)
-    });
-  };
 
   handleAnswerChange(i) {
     return event => {
