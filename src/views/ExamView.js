@@ -8,7 +8,9 @@ import {
   Modal,
   ModalBody,
   ModalHeader,
-  Button
+  Button,
+  Form,
+  FormInput,
 } from 'shards-react';
 import ExamCard from '../components/cards/ExamCard';
 import ExamInfoCard from '../components/cards/ExamInfoCard';
@@ -20,11 +22,17 @@ class ExamView extends Component {
     super(props);
 
     this.state = {
+      n: '',
+      submitted: false,
       open: false,
+      update: false,
     };
 
     this.handleDelete = this.handleDelete.bind(this);
-    this.toggleModal = this.toggleModal.bind(this)
+    this.toggleModal = this.toggleModal.bind(this);
+    this.handleUpdate= this.handleUpdate.bind(this);
+    this.toggleUpdate = this.toggleUpdate.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -41,9 +49,36 @@ class ExamView extends Component {
    this.setState({ open: !this.state.open });
   }
 
+  toggleUpdate() {
+   this.setState({ update: !this.state.update });
+  }
+
+  handleUpdate(event) {
+    event.preventDefault();
+
+    this.setState({ submitted: true });
+    const { n } = this.state;
+    const { dispatch, user, examId } = this.props;
+    if (n !== '') {
+      dispatch(actions.updateExam(user, examId, { name: n }));
+      this.setState({
+        n: '',
+        submitted: false,
+        update: false,
+      });
+    }
+  }
+
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value,
+    });
+  }
+
   render() {
     const { examId, name, answers } = this.props;
-    const { open } = this.state;
+    const { open, update, n, submitted } = this.state;
     return (
       <Container fluid>
         <Row>
@@ -61,7 +96,28 @@ class ExamView extends Component {
                   <span className='text-uppercase page-subtitle'>Exam Overview</span>
                   <h3 className='page-title'>{name}</h3>
                 </Col>
-                <Button outline theme='danger' className='mr-2 ml-auto' onClick={ this.toggleModal }>Delete Exam</Button>
+                <Button outline theme='accent' className='mr-2 ml-auto' onClick={ this.toggleUpdate }>
+                  Edit Exam
+                </Button>
+                <Modal open={ update } toggle={ this.toggleUpdate }>
+                  <ModalHeader>Edit Exam Name</ModalHeader>
+                  <ModalBody>
+                    <Row form>
+                      <Form onSubmit={ this.handleUpdate } className='w-100'>
+                        <FormInput
+                          type='text'
+                          invalid={submitted && n === ''}
+                          name='n'
+                          value={n}
+                          onChange={this.handleChange}
+                          placeholder={`New Exam Name`}
+                        />
+                        <Button outline className='mt-2'>Edit</Button>
+                      </Form>
+                    </Row>
+                  </ModalBody>
+                </Modal>
+                <Button outline theme='danger' className='mr-2 ml-2' onClick={ this.toggleModal }>Delete Exam</Button>
                 <Modal open={ open } toggle={ this.toggleModal }>
                   <ModalHeader>Are you sure?</ModalHeader>
                   <ModalBody>

@@ -314,6 +314,29 @@ function getExam(user, examId) {
   }
 }
 
+function updateExam(user, examId, name) {
+  return dispatch => {
+    // Set up DELETE request
+    const url = `${apiUrl}/exam/${user.email}/${examId}`;
+    const requestOptions = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(name),
+    };
+
+    // DELETE using fetch API
+    fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      dispatch(getExam(user, examId));
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+}
+
 function deleteExam(user, examId, courseId) {
   return dispatch => {
     // Set up DELETE request
@@ -465,6 +488,7 @@ export default {
     deleteCourse,
     createExam,
     getExam,
+    updateExam,
     deleteExam,
     getAllExams,
     getAllGrades,
