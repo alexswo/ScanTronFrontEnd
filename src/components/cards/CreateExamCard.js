@@ -7,11 +7,20 @@ import {
   Collapse,
   Form,
   FormInput,
+  FormSelect,
   InputGroup,
-  InputGroupAddon,
 } from 'shards-react';
 import actions from '../../actions';
 import examSheet from '../../mc_sheet.pdf';
+
+const options = [
+{ value: '', label: 'Add Answer' },
+{ value: 'A', label: 'A' },
+{ value: 'B', label: 'B' },
+{ value: 'C', label: 'C' },
+{ value: 'D', label: 'D' },
+{ value: 'E', label: 'E' },
+];
 
 class CreateExamCard extends Component {
   constructor(props) {
@@ -19,7 +28,7 @@ class CreateExamCard extends Component {
 
     this.state = {
       name: '',
-      answers: [''],
+      answers: ['', '', '', '', ''],
       collapse: false,
       submitted: false,
     };
@@ -48,11 +57,11 @@ class CreateExamCard extends Component {
     this.setState({ submitted: true });
     const { name, answers } = this.state;
     const { dispatch, user, id } = this.props;
-    if (name && answers.length > 0) {
+    if (name && answers.filter(answer => answer === '').length === 0) {
       dispatch(actions.createExam(user, id, { name, answers }));
       this.setState({
         name: '',
-        answers: [''],
+        answers: ['', '', '', '', ''],
         collapse: false,
         submitted: false,
       })
@@ -113,29 +122,22 @@ class CreateExamCard extends Component {
                   <label htmlFor='description'>Answers</label>
                   { answers.map((answer, i) => (
                     <InputGroup key={ `Answer ${i}` }>
-                      <FormInput
+                      <FormSelect
                         invalid={submitted && !answer}
-                        type='text'
-                        placeholder={`Answer for Question ${i + 1}`}
                         value={ answer }
                         onChange={ this.handleAnswerChange(i) }
-                      />
-                      <InputGroupAddon type="append">
-                        <Button outline onClick={ () => this.handleRemoveAnswer(i) } className='small'>-</Button>
-                      </InputGroupAddon>
+                      >
+                        {options.map(option => (
+                          <option key={option.label} value={option.value}>{option.label}</option>
+                        ))}
+                      </FormSelect>
                     </InputGroup>
                   ))}
                   <Button
-                    theme='accent'
-                    onClick={ this.handleAddAnswer }
-                    className='small mt-2'
-                  >
-                    Add Answer
-                  </Button>
-                  <Button
                     href={examSheet}
-                    theme='light'
-                    className='small ml-2 mt-2'
+                    outline
+                    theme='secondary'
+                    className='small mt-2'
                     download='exam_sheet.pdf'
                   >
                     Download Exam
