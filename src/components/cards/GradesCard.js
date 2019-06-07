@@ -2,34 +2,11 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {
   Card,
-  Button,
   CardHeader,
   CardBody,
 } from 'shards-react';
 import actions from '../../actions';
-
-const GradeItem = ({ grade }) => {
-  return(
-    <tr>
-      <td>
-        {grade.studentid}
-      </td>
-      <td>
-        {grade.score}
-      </td>
-      <td>
-        <Button outline href={`https://${grade.raw_url}`} target='_blank'>
-          View
-        </Button>
-      </td>
-      <td>
-        <Button outline href={`https://${grade.graded_url}`} target='_blank'>
-          Download
-        </Button>
-      </td>
-    </tr>
-  )
-}
+import GradeItem from './GradeItem.js';
 
 class GradesCard extends Component {
   componentDidMount() {
@@ -46,9 +23,9 @@ class GradesCard extends Component {
           <h6 className='m-0'>Grades</h6>
         </CardHeader>
         <CardBody className='p-0'>
-          <table className='table'>
+          <table className='table' align='right'>
             <thead className='bg-light'>
-              <tr>
+              <tr className='text-center'>
                 <th scope='col' className='border-0'>
                   Student Id
                 </th>
@@ -61,11 +38,14 @@ class GradesCard extends Component {
                 <th scope='col' className='border-0'>
                   Graded Exam
                 </th>
+                <th scope='col' className='border-0'>
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody>
               {grades && grades.map(grade => (
-                <GradeItem grade={grade} />
+                <GradeItem grade={grade} key={grade.gradeid} {...this.props} />
               ))}
             </tbody>
           </table>

@@ -339,6 +339,72 @@ function getAllGrades(user, examId) {
   }
 }
 
+function getGrade(user, gradeId, examId) {
+  return dispatch => {
+    // Set up GET request
+    const url = `${apiUrl}/grade/${user.email}/${gradeId}`;
+    const requestOptions = {
+      method: 'GET',
+      credentials: 'include',
+    };
+
+    // GET using fetch API
+    fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      dispatch({ type: 'EXAM_GRADE', examId, grade: response });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+}
+
+function deleteGrade(user, gradeId, examId) {
+  return dispatch => {
+    // Set up DELETE request
+    const url = `${apiUrl}/grade/${user.email}/${gradeId}`;
+    const requestOptions = {
+      method: 'DELETE',
+      credentials: 'include',
+    };
+
+    // DELETE using fetch API
+    fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      dispatch({ type: 'CLEAR_GRADE', gradeId, examId });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+}
+
+function updateGrade(user, score, gradeId, examId) {
+  return dispatch => {
+    // Set up PUT request
+    const url = `${apiUrl}/grade/${user.email}/${gradeId}`;
+    const requestOptions = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(score),
+    };
+
+    // PUT using fetch API
+    fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      console.log(`updated grade, GET updated data`);
+      dispatch(getAllGrades(user, examId));
+    })
+    .catch((error) =>{
+      console.log(error);
+    })
+  }
+}
+
 export default {
     logout,
     login,
@@ -355,4 +421,7 @@ export default {
     getExam,
     getAllExams,
     getAllGrades,
+    getGrade,
+    deleteGrade,
+    updateGrade,
 };

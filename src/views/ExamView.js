@@ -12,11 +12,6 @@ class ExamView extends Component {
     dispatch(actions.getExam(user, examId));
   }
 
-  componentWillUnmount() {
-    const { dispatch } = this.props;
-    dispatch(actions.clearCourse());
-  }
-
   render() {
     const { examId, name } = this.props;
     return (
@@ -40,7 +35,7 @@ class ExamView extends Component {
               <Row noGutters style={{ 'width': '100%' }} className='mb-4'>
                 <ExamCard title={name} id={examId} />
               </Row>
-              <GradesCard id={examId} />
+              <GradesCard id={examId}/>
             </Container>
           </Col>
         </Row>
