@@ -14,7 +14,7 @@ const ExamInfoCard = ({ name, answers, id }) => (
     </CardHeader>
     <ListGroup flush>
       {answers && answers.map((answer, i) => (
-        <ListGroupItem className='p-3 ml-2'>
+        <ListGroupItem className='p-3 ml-2' key={i}>
           {`Question ${i+1}: ${answer}`}
         </ListGroupItem>
       ))}

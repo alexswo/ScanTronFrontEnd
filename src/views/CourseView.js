@@ -168,7 +168,7 @@ class CourseView extends Component {
                 </ListGroup>
               </Card>
               <CreateExamCard id={ courseId }/>
-              {exams && exams.map(exam => (
+              {exams && exams.map(exam => (exam &&
                 <Row noGutters style={{ 'width': '100%' }} key={exam.examid} className='mb-4'>
                   <ExamCard title={exam.name} id={exam.examid} />
                 </Row>
