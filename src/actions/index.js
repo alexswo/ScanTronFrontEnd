@@ -217,9 +217,11 @@ function createCourse(user, course) {
     .then((response) => {
       console.log('made new course, getting updated list');
       dispatch(getAllCourses(user));
+      dispatch({ type: 'SUCCESS', message: `Successfully created new course: ${course.name}!` });
     })
     .catch((error) => {
       console.log(error);
+      dispatch({ type: 'FAIL', message: `Failed to create new course: ${course.name} :(` });
     });
   }
 }
