@@ -52,8 +52,8 @@ class CourseView extends Component {
   }
 
   handleDelete() {
-    const { dispatch, id, user } = this.props;
-    dispatch(actions.deleteCourse(user, id));
+    const { dispatch, courseId, user } = this.props;
+    dispatch(actions.deleteCourse(user, courseId));
   }
 
   toggleUpdate() {
