@@ -1,5 +1,5 @@
-let jsonWebToken = JSON.parse(localStorage.getItem('user'));
-const initialState = jsonWebToken ? { loggedIn: true } : {};
+let user = JSON.parse(localStorage.getItem('user'));
+const initialState = user ? { user } : {};
 
 export function authentication(state = initialState, action) {
   switch (action.type) {
