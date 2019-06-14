@@ -1,0 +1,78 @@
+Noteworthy Changes for release 2.4 (2019-06-08)
+
+* New Features
+	Alerts are now displayed to user to display if creating/updating/deleting an element was a success!
+	A green or red floating alert is displayed for 3 seconds
+
+Noteworthy Changes for release 2.3 (2019-06-07)
+
+* Bug fixes
+	Fix issue where getting null in response from backend
+
+* Updates
+	Creating an exam now has you specify answers for the 5 questions in a drop down list
+
+Noteworthy Changes for release 2.2 (2019-06-07)
+
+* New Features
+	Ability to delete/update both a course and an exam
+
+Noteworthy Changes for release 2.1 (2019-06-06)
+
+* Bug fixes
+	Fixed how chart.js was being used to bucket grades in the grade distribution graph
+	
+* New Features
+	Adding Update and Delete buttons for grades
+
+Noteworthy Changes for release 2.0 (2019-06-05)
+
+Big update!
+
+* Bug fixes
+	General code clean up, issues pertaining to jwt further resolved
+	Change Settings to User
+
+* New Features
+	New Course and Exam views. Can now create exams, specify the answer key,
+	and download blank tests. The Exam view now shows a list of grades and answer keys
+	Course view now lists each exam associated with the course with a card visualizing
+	the grade distribution.
+
+Noteworthy Changes for release 1.2 (2019-06-03)
+
+* Updates
+	Settings view now uses real data
+
+* New Features
+	Now able to view and create courses on the web app
+
+Noteworthy Changes for release 1.1 (2019-06-03)
+
+* Bug fixes
+	Handled issue with authorization using jwt token
+
+* Updates
+	Updates to register/login flow
+
+Noteworthy Changes for release 1.0 (2019-06-01)
+
+* New Features
+	Login and Register functionality now enabled
+	Initial Redux state has been added
+
+Noteworthy Changes for release 0.3 (2019-05-17)
+
+* New Features
+	Completed mock site, ready for presentation
+	Added useful cards, such as grade distribution card using chart.js
+
+Noteworthy Changes for release 0.2 (2019-05-17)
+
+* New Features
+	Added views for register and login
+
+Noteworthy changes for release 0.1 (2019-05-10) 
+
+* New Features
+	Initial SPA with various views: Assignment view, Class view, Settings view, and Student view.

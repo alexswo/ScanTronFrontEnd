@@ -1,0 +1,108 @@
+2019-06-07 Anthony Xue <anthkx@ucla.edu>
+
+* src/actions/index.js : Actions for updating alert state 
+* src/components/cards/AlertCard.js : New alert card to be displayed after user action
+* src/reducers/alert.js : Adding alert state
+* src/views/CourseView.js : Adding alert card
+* src/views/CoursesView.js : Adding alert card
+* src/views/ExamView.js : Adding alert card
+
+2019-06-07 Anthony Xue <anthkx@ucla.edu>
+
+* src/actions/index.js : Update to actions
+* src/components/cards/UserCard.js : Change Settings to User, updating card to be prefilled form
+
+* src/components/cards/CreateExamCard.js : Change to list of 5 select boxes
+* src/views/CourseView.js : Existence checking
+
+* src/actions/index.js : Add action to update courses, and handle exams
+* src/components/cards/* : Renaming and refactoring of common components
+* src/views/CourseView.js : Adding way to create exams
+* src/views/ExamView.js : Adding way to edit and delete exams
+
+2019-06-07 Anthony Xue <anthkx@ucla.edu>
+
+* src/actions/index.js : Add actions to delete, get, update grades
+* src/components/cards/CreateExamCard.js : Update to validation visuals
+* src/components/cards/ExamCard.js : Improve chart.js usage
+* src/components/cards/GradeItem.js : Added component for grades
+* src/components/cards/GradesCard.js : Added component for grades
+* src/reducers/exams.js : Update to reducer to handle exam state
+* src/views/ExamView.js : Updates to whats displayed for exam view
+
+2019-06-06 Anthony Xue <anthkx@ucla.edu>
+
+* src/components : Update components for course and exam views
+* src/reducers : Update to reducers for state for course and exam views
+* src/actions/index.js : Adding actions to get individual course and exam
+* src/routes.js : Solidify protected routes
+* src/views : Update to views, adding course and exam views
+
+2019-06-05 Anthony Xue <anthkx@ucla.edu>
+
+* src/components/cards/CreateCourseCard.js : Update mapStateToProps to use authentication.user in state
+* src/components/cards/SettingsCard.js : Update settings card 
+* src/views/CoursesView.js : Update mapStateToProps to use authentication.user in state
+
+2019-06-03 Anthony Xue <anthkx@ucla.edu>
+
+* src/components : Update to cards for creating and showing courses
+* src/reducers : Update to reducers
+* src/actions/index.js : Add actions to get and create courses for users
+* src/routes.js : Update to routes for jwt token in cookie
+* src/views : Update to view, rename Classes/Class to Courses/Course
+
+2019-06-03 Anthony Xue <anthkx@ucla.edu>
+
+* src/components : Update to assignment card and sidebar
+* src/reducers : Update to reducers
+* src/actions/index.js : Adding actions for async requests/dispatch to redux
+* src/routes.js : Update to routes for jwt token
+* src/views : Update to views
+
+2019-06-01 Anthony Xue <anthkx@ucla.edu>
+
+* src/components/cards : Update to all cards 
+* src/history.js : Add custom history to allow pushing to
+* src/reducers : Adding reducers to manage redux state
+* src/views : Update to views
+
+2019-05-17 Anthony Xue <anthkx@ucla.edu>
+
+Added numerous cards and views listed below. Updates to sidebar and route.
+* src/components/cards/AssignmentCard.js
+* src/components/cards/ClassCard.js
+* src/components/cards/OverviewCard.js
+* src/components/layout/SideBar.js
+* src/routes.js
+* src/views/AssignmentView.js
+* src/views/ClassView.js
+* src/views/ClassesView.js
+* src/views/LoginView.js
+* src/views/StudentView.js
+
+2019-05-17 Anthony Xue <anthkx@ucla.edu>
+
+* src/components/cards/RegisterCard.js : Add registration card
+* src/index.js : Update for route
+* src/routes.js : Add new routes
+* src/views/LoginView.js : Add login view
+* src/views/RegisterView.js : Add registration view
+* src/views/SettingsView.js : Add settings view
+
+2019-05-10 Anthony Xue <anthkx@ucla.edu>
+
+Added initial source code for project (20+ files). Notable ones listed below
+* src/components/cards/AssignmentCard.js
+* src/components/cards/OverviewCard.js
+* src/components/cards/SettingsCard.js
+* src/components/cards/StudentCard.js
+* src/components/layout/SideBar.js
+* src/components/layout/SideBarItem.js
+* src/index.js
+* src/routes.js
+* src/shards.min.css
+* src/views/assignmentView.js
+* src/views/classView.js
+* src/views/settingsView.js
+* src/views/studentView.js
